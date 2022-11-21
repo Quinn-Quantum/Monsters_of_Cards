@@ -1,0 +1,9 @@
+C:\USERS\OTTO\DOCUMENTS\C#\MONSTERS_OF_CARDS\MONSTERS_OF_CARDS\MONSTER_OF_CARDS_GAME\.mono\temp\bin\Debug\Monster_of_Cards_Game.dll
+C:\USERS\OTTO\DOCUMENTS\C#\MONSTERS_OF_CARDS\MONSTERS_OF_CARDS\MONSTER_OF_CARDS_GAME\.mono\temp\bin\Debug\Monster_of_Cards_Game.pdb
+C:\USERS\OTTO\DOCUMENTS\C#\MONSTERS_OF_CARDS\MONSTERS_OF_CARDS\MONSTER_OF_CARDS_GAME\.mono\temp\obj\Debug\Monster_of_Cards_Game.csproj.AssemblyReference.cache
+C:\USERS\OTTO\DOCUMENTS\C#\MONSTERS_OF_CARDS\MONSTERS_OF_CARDS\MONSTER_OF_CARDS_GAME\.mono\temp\obj\Debug\Monster_of_Cards_Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\USERS\OTTO\DOCUMENTS\C#\MONSTERS_OF_CARDS\MONSTERS_OF_CARDS\MONSTER_OF_CARDS_GAME\.mono\temp\obj\Debug\Monster_of_Cards_Game.AssemblyInfoInputs.cache
+C:\USERS\OTTO\DOCUMENTS\C#\MONSTERS_OF_CARDS\MONSTERS_OF_CARDS\MONSTER_OF_CARDS_GAME\.mono\temp\obj\Debug\Monster_of_Cards_Game.AssemblyInfo.cs
+C:\USERS\OTTO\DOCUMENTS\C#\MONSTERS_OF_CARDS\MONSTERS_OF_CARDS\MONSTER_OF_CARDS_GAME\.mono\temp\obj\Debug\Monster_of_Cards_Game.csproj.CoreCompileInputs.cache
+C:\USERS\OTTO\DOCUMENTS\C#\MONSTERS_OF_CARDS\MONSTERS_OF_CARDS\MONSTER_OF_CARDS_GAME\.mono\temp\obj\Debug\Monster_of_Cards_Game.dll
+C:\USERS\OTTO\DOCUMENTS\C#\MONSTERS_OF_CARDS\MONSTERS_OF_CARDS\MONSTER_OF_CARDS_GAME\.mono\temp\obj\Debug\Monster_of_Cards_Game.pdb

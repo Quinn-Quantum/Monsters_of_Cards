@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Karte/Card.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Monsters/Monster_01.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 201.25, 300 )
+
+[sub_resource type="ArrayMesh" id=2]
+surfaces/0 = {
+"aabb": AABB( -283.5, -425, 0, 567, 850, 0 ),
+"array_data": PoolByteArray( 0, 192, 141, 67, 0, 128, 212, 67, 0, 0, 128, 63, 0, 0, 128, 63, 0, 192, 141, 195, 0, 128, 212, 67, 0, 0, 0, 0, 0, 0, 128, 63, 0, 192, 141, 195, 0, 128, 212, 195, 0, 0, 0, 0, 0, 0, 0, 0, 0, 192, 141, 67, 0, 128, 212, 195, 0, 0, 128, 63, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 3, 0, 0, 0, 1, 0, 1, 0, 2, 0, 3, 0 ),
+"blend_shape_data": [  ],
+"format": 262417,
+"index_count": 6,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 198.75, 301 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="KinematicBody2D"]
+position = Vector2( -1229, -1376 )
+scale = Vector2( 123.5, 151.5 )
+
+[node name="Sprite" type="MeshInstance2D" parent="KinematicBody2D/MeshInstance2D"]
+position = Vector2( 11.5962, 11.0875 )
+scale = Vector2( 0.00570872, 0.00467871 )
+mesh = SubResource( 2 )
+texture = ExtResource( 2 )
