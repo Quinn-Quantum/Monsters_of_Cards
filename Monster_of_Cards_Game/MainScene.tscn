@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="MainScene" type="Node2D"]
+position = Vector2( 489, 286 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+text = "Test"
