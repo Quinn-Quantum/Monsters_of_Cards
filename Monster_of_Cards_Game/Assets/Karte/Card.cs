@@ -34,6 +34,7 @@ public class Card : Node2D
 		int index = random.Next(myTextureList.Count);
 		Godot.Sprite cartSprite =  this.GetNode<Godot.Sprite>("Card_Sprite");
 		
+		
 
 		//var texture = (Texture)GD.Load("res://Assets/Monsters/Monster_02.png"); // resource is loaded when line is executed
 		GD.Print(myTextureList[index]);
