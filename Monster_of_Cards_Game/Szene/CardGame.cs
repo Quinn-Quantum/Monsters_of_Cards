@@ -11,11 +11,7 @@ using System.Linq;
 public class CardGame : Node2D
 {
 	private List<string> myTextureList = new List<string>();
-	public PackedScene simultaneousScene = (PackedScene)GD.Load("res://Assets/Karte/Monster_01.tscn");
-	
-	//public MyClass(){
-		//simultaneousScene = (PackedScene)ResourceLoader.Load("res://Assets/Karte/Monster_01.tscn");
-	//}
+	public PackedScene simultaneousScene ;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -33,14 +29,9 @@ public class CardGame : Node2D
 			int index = random.Next(myTextureList.Count);
 			simultaneousScene = (PackedScene)GD.Load(myTextureList[index]);
 			Node test = simultaneousScene.Instance();
-			
 			AddChild(test);
-			test.Translation= new Vector2(10*i, 10*i);
+			//test.Translation= new Vector2(10*i, 10*i);
 		}
-		
-		
-		
-		
 		
 	}
 
