@@ -1,2 +1,2 @@
-﻿49285
-C:/Users/Otto/Documents/Godot_v3.5-stable/Godot_v3.5.1-stable_mono_win64/Godot_v3.5.1-stable_mono_win64.exe
+﻿63306
+F:/Godot/Godot_v3.4.4-stable_mono_win64/Godot_v3.4.4-stable_mono_win64/Godot_v3.4.4-stable_mono_win64.exe
