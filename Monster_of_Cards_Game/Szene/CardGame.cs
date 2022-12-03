@@ -28,9 +28,11 @@ public class CardGame : Node2D
 		for(int i = 0; i <3; i++){
 			int index = random.Next(myTextureList.Count);
 			simultaneousScene = (PackedScene)GD.Load(myTextureList[index]);
+			
 			Node test = simultaneousScene.Instance();
+			
 			AddChild(test);
-			//test.Translation= new Vector2(10*i, 10*i);
+			//test.Translation= Vector2(10*i, 10*i);
 		}
 		
 	}
