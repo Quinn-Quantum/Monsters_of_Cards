@@ -14,6 +14,7 @@ public class CardGame : Node2D
 	public PackedScene simultaneousScene ;
 
 	private Card_Test _Card;
+	private Monster_09 _monster;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -32,6 +33,11 @@ public class CardGame : Node2D
 		_Card = GetNode<Card_Test>("Card_Test");
 		_Card.SetGlobalPosition(new Vector2(300,400));
 		_Card.SetVisible(false);
+
+		_Card = GetNode<Monster_09>("Monster_09");
+		_Card.SetGlobalPosition(new Vector2(200,400));
+	
+		
 		
 		for(int i = 0; i <3; i++){
 			int index = random.Next(myTextureList.Count);
