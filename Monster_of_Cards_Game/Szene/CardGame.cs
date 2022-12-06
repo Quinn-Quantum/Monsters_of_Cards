@@ -13,8 +13,8 @@ public class CardGame : Node2D
 	private List<string> myTextureList = new List<string>();
 	public PackedScene simultaneousScene ;
 
-	private Card_Test _Card;
-	private Monster_09 _monster;
+	private Monster_01_2D  _Monster01;
+	private Monster_02_2D  _Monster02;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -30,24 +30,18 @@ public class CardGame : Node2D
 		Random random = new Random();
 		GD.Print(random);
 
-		_Card = GetNode<Card_Test>("Card_Test");
-		_Card.SetGlobalPosition(new Vector2(300,400));
-		_Card.SetVisible(false);
-
-		_Card = GetNode<Monster_09>("Monster_09");
-		_Card.SetGlobalPosition(new Vector2(200,400));
 	
+		_Monster01 = GetNode<Monster_01_2D>("Monster_01");
+		_Monster01.SetGlobalPosition(new Vector2(100,200));
+		_Monster02 = GetNode<Monster_02_2D>("Monster_02_2D");
+		_Monster02.SetGlobalPosition(new Vector2(300,200));
+		
 		
 		
 		for(int i = 0; i <3; i++){
 			int index = random.Next(myTextureList.Count);
 			GD.Print("Hi: ",index);
-			//simultaneousScene = (PackedScene)GD.Load(myTextureList[index]);
-			simultaneousScene = (PackedScene)GD.Load(myTextureList[4]);
-			var test = simultaneousScene.Instance();
-			var zahl = test.GetPositionInParent();
-			GD.Print("HI: ",zahl);
-			AddChild(test);
+			
 			
 		
 			
@@ -58,8 +52,11 @@ public class CardGame : Node2D
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+  public override void _Process(float delta)
+  {
+     if(Input.IsActionJustPressed("draw")){
+		GD.Print("Draw");
+
+	 }
+  }
 }

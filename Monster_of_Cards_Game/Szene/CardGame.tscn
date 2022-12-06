@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Szene/CardGame.cs" type="Script" id=1]
 [ext_resource path="res://Assets/hintergrund_test.png" type="Texture" id=2]
-[ext_resource path="res://Szene/Card_Test.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Karte/Monster_09.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Area2D_Cards/Monster_01_2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Area2D_Cards/Monster_02_2D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Area2D_Cards/Card_back.tscn" type="PackedScene" id=5]
 
 [node name="CardGame" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,6 +16,10 @@ texture = ExtResource( 2 )
 [node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 559, 344 )
 
-[node name="Card_Test" parent="." instance=ExtResource( 3 )]
+[node name="Monster_01" parent="." instance=ExtResource( 3 )]
+position = Vector2( -105, 139 )
 
-[node name="Monster_09" parent="." instance=ExtResource( 4 )]
+[node name="Monster_02_2D" parent="." instance=ExtResource( 4 )]
+
+[node name="Card_back" parent="." instance=ExtResource( 5 )]
+position = Vector2( 834, 343 )

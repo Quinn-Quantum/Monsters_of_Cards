@@ -9,3 +9,7 @@ Karte wird sichtbar und kommt in die Hand.
 Karten sollten Area2d sein.
 
 -> dieser stand wurde nach über 4h arbeit ereicht 
+
+rundenbasierent -> Tasensteuerung
+
+Karten herforheben wenn ausgewählt -> größer/ hochsetzen?
