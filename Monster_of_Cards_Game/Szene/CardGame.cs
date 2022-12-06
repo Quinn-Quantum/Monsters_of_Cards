@@ -10,37 +10,36 @@ using System.Linq;
 
 public class CardGame : Node2D
 {
-	private List<string> myTextureList = new List<string>();
+
+	
+	private List<Monster_01_2D> myCardList = new List<Monster_01_2D>();
 	public PackedScene simultaneousScene ;
 
 	private Monster_01_2D  _Monster01;
-	private Monster_02_2D  _Monster02;
+	private Monster_01_2D  _Monster02;
+
+	
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-		myTextureList.Add("res://Assets/Karte/Monster_01.tscn");
-		myTextureList.Add("res://Assets/Karte/Monster_02.tscn");
-		myTextureList.Add("res://Assets/Karte/Monster_03.tscn");
-		myTextureList.Add("res://Assets/Karte/Monster_04.tscn");
-		myTextureList.Add("res://Assets/Karte/Card.tscn");
 		
-		
-		GD.Randomize();
-		Random random = new Random();
-		GD.Print(random);
-
-	
 		_Monster01 = GetNode<Monster_01_2D>("Monster_01");
 		_Monster01.SetGlobalPosition(new Vector2(100,200));
-		_Monster02 = GetNode<Monster_02_2D>("Monster_02_2D");
-		_Monster02.SetGlobalPosition(new Vector2(300,200));
+		_Monster01._SetImage("res://Assets/Monsters/Monster_04.png");
+		
+		_Monster02 = GetNode<Monster_01_2D>("Monster_02");
+		_Monster02.SetGlobalPosition(new Vector2(300,100));
+		_Monster02._SetImage("res://Assets/Monsters/Monster_09.png");
+
+		
+
+		myCardList.Add(_Monster01);
+		myCardList.Add(_Monster02);
 		
 		
 		
-		for(int i = 0; i <3; i++){
-			int index = random.Next(myTextureList.Count);
-			GD.Print("Hi: ",index);
+		
 			
 			
 		
@@ -48,15 +47,26 @@ public class CardGame : Node2D
 			
 			//test.Translation= Vector2(10*i, 10*i);
 		}
-		
-	}
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
+		// Called every frame. 'delta' is the elapsed time since the previous frame.
   public override void _Process(float delta)
   {
      if(Input.IsActionJustPressed("draw")){
 		GD.Print("Draw");
+		GD.Randomize();
+		Random random = new Random();
+		for(int i = 0; i <1; i++){
+			int index = random.Next(myCardList.Count);
+			var move = myCardList[index];
+			move.SetGlobalPosition(new Vector2(500,500));
+			
+			GD.Print("Hi: ",index);
+
+
 
 	 }
   }
-}
+  }
+
+		
+	}
+  
