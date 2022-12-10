@@ -24,10 +24,49 @@ texture = ExtResource( 2 )
 position = Vector2( 559, 344 )
 
 [node name="Monster_01" parent="." instance=ExtResource( 3 )]
-position = Vector2( -105, 139 )
+position = Vector2( 796, 358 )
 
 [node name="Monster_02" parent="." instance=ExtResource( 3 )]
-position = Vector2( -105, 139 )
+position = Vector2( 794, 358 )
+
+[node name="Monster_03" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_04" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_05" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_06" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_07" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_08" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_09" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_10" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_11" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_12" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_13" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_14" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_15" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
 
 [node name="Card_back" parent="." instance=ExtResource( 5 )]
 position = Vector2( 844, 360 )
