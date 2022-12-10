@@ -11,8 +11,8 @@ using System.Linq;
 public class CardGame : Node2D
 {
 
+	//All Cards
 	
-	private List<Monster_01_2D> myCardList = new List<Monster_01_2D>();
 	public PackedScene simultaneousScene ;
 
 	private Monster_01_2D  _Monster01;
@@ -29,9 +29,17 @@ public class CardGame : Node2D
 	private Monster_01_2D  _Monster12;
 	private Monster_01_2D  _Monster13;
 
-	private bool firstDraw = true;
-	private Vector2 hand1;
+	//Für Spieler eins
+	private List<Monster_01_2D> myCardList = new List<Monster_01_2D>();
 
+	private List<Monster_01_2D> playerOneHand = new List<Monster_01_2D>();
+	private deck_number number_cards_in_deck;
+
+	private bool firstDraw = true;
+	//Hand Positionen
+	private List<Vector2> hand1_pos = new List<Vector2>();
+	
+	//für Spieler zwei
 	private Vector2 hand2;
 
 
@@ -41,6 +49,14 @@ public class CardGame : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+		hand1_pos.Add(new Vector2(60,400));
+		hand1_pos.Add(new Vector2(160,400));
+		hand1_pos.Add(new Vector2(260,400));
+		hand1_pos.Add(new Vector2(360,400));
+		hand1_pos.Add(new Vector2(460,400));
+		hand1_pos.Add(new Vector2(560,400));
+		
+		
 		
 		_Monster01 = GetNode<Monster_01_2D>("Monster_01");
 		_Monster01._SetImage("res://Assets/Monsters/Monster_01.png");
@@ -81,8 +97,6 @@ public class CardGame : Node2D
 		_Monster13 = GetNode<Monster_01_2D>("Monster_13");
 		_Monster13._SetImage("res://Assets/Monsters/Monster_13.png");
 
-		
-
 		myCardList.Add(_Monster01);
 		myCardList.Add(_Monster02);
 		myCardList.Add(_Monster03);
@@ -90,14 +104,18 @@ public class CardGame : Node2D
 		myCardList.Add(_Monster05);
 		myCardList.Add(_Monster06);
 		myCardList.Add(_Monster07);
+		myCardList.Add(_Monster08);
+		myCardList.Add(_Monster09);
+		myCardList.Add(_Monster10);
+		myCardList.Add(_Monster11);
+		myCardList.Add(_Monster12);
+		myCardList.Add(_Monster13);
+
+
+		number_cards_in_deck = GetNode<deck_number>("deck_number");
+		number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
 		
 		
-		
-		
-			
-			
-		
-			
 			
 			//test.Translation= Vector2(10*i, 10*i);
 		}
@@ -107,31 +125,40 @@ public class CardGame : Node2D
 
 	
      if(Input.IsActionJustPressed("draw")){
-		GD.Print("Draw");
 		GD.Randomize();
 		Random random = new Random();
 		if(firstDraw){
-			for(int i = 1; i <=5; i++){
+			for(int i = 0; i <=4; i++){
 			int index = random.Next(myCardList.Count);
 			var move = myCardList[index];
+
+			playerOneHand.Add(move);
 			move.SetVisible(true);
-			move.SetGlobalPosition(new Vector2(100*i,400));
 			myCardList.RemoveAt(index);
-			firstDraw = false;
+			number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
 			
-		}
+			}
+			firstDraw = false;
 		}
 		else{
 			int index_n = random.Next(myCardList.Count);
 			var move = myCardList[index_n];
 			move.SetVisible(true);
-			move.SetGlobalPosition(new Vector2(100,300));
+			
 			myCardList.RemoveAt(index_n);
+			playerOneHand.Add(move);
+			number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
 		}
 		
-			
+			for(int k=0; k<playerOneHand.Count; k++){
+
+				var card = playerOneHand[k];
+				card.SetGlobalPosition(hand1_pos[k]);
+  			}
 
   }
+  
+ 	 
   }
 		
 	}
