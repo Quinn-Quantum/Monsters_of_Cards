@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Otto\\Documents\\C#\\Monsters_of_Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj": {}
+    "C:\\Users\\Otto\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Otto\\Documents\\C#\\Monsters_of_Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj": {
+    "C:\\Users\\Otto\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Otto\\Documents\\C#\\Monsters_of_Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj",
+        "projectUniqueName": "C:\\Users\\Otto\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj",
         "projectName": "Monster_of_Cards_Game",
-        "projectPath": "C:\\Users\\Otto\\Documents\\C#\\Monsters_of_Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj",
+        "projectPath": "C:\\Users\\Otto\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj",
         "packagesPath": "C:\\Users\\Otto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Otto\\Documents\\C#\\Monsters_of_Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\.mono\\temp\\obj\\",
+        "outputPath": "C:\\Users\\Otto\\Monsters_of_Cards\\Monster_of_Cards_Game\\.mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -43,7 +43,15 @@
       "frameworks": {
         "net472": {
           "targetAlias": "net472",
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.2, )",
+              "autoReferenced": true
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
