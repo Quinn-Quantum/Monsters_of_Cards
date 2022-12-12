@@ -33,27 +33,42 @@ public class CardGame : Node2D
 	private List<Monster_01_2D> myCardList = new List<Monster_01_2D>();
 
 	private List<Monster_01_2D> playerOneHand = new List<Monster_01_2D>();
+	private Monster_01_2D choose_card;
 	private deck_number number_cards_in_deck;
 
 	private bool firstDraw = true;
 	//Hand Positionen
 	private List<Vector2> hand1_pos = new List<Vector2>();
+	private bool cardhighlighted = false;
+	private int pos ;
+	private int max_pos;
+	private int min_pos = 0;
+	//Feld Player one
+	private List<Vector2> field1_pos = new List<Vector2>();
+	private bool fild1full=false;
 	
 	//für Spieler zwei
 	private Vector2 hand2;
 
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+		
+		//Hand Positionen Player one
 		hand1_pos.Add(new Vector2(60,400));
 		hand1_pos.Add(new Vector2(160,400));
 		hand1_pos.Add(new Vector2(260,400));
 		hand1_pos.Add(new Vector2(360,400));
 		hand1_pos.Add(new Vector2(460,400));
 		hand1_pos.Add(new Vector2(560,400));
+		//Feld Positionen Player one
+		field1_pos.Add(new Vector2(100,200));
+		field1_pos.Add(new Vector2(260,200));
+		field1_pos.Add(new Vector2(360,200));
 		
 		
-		
+		//Dec Player one
 		_Monster01 = GetNode<Monster_01_2D>("Monster_01");
 		_Monster01._SetImage("res://Assets/Monsters/Monster_01.png");
 		
@@ -107,7 +122,7 @@ public class CardGame : Node2D
 		myCardList.Add(_Monster12);
 		myCardList.Add(_Monster13);
 
-
+		//
 		number_cards_in_deck = GetNode<deck_number>("deck_number");
 		number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
 		
@@ -152,6 +167,85 @@ public class CardGame : Node2D
   			}
 
   }
+  max_pos = playerOneHand.Count;
+  if(!cardhighlighted){
+	if(Input.IsActionJustPressed("Card_01")){
+			pos = 0;
+			choose_card = playerOneHand[pos];
+			GD.Print(choose_card.GetScale());
+
+			choose_card.SetGlobalScale(new Vector2(2,2));
+			choose_card.SetZIndex(1);
+			cardhighlighted = true;
+	}
+
+	
+
+  }
+
+	else if(cardhighlighted){
+		
+		if(Input.IsActionJustPressed("go_right")){
+		choose_card = playerOneHand[pos];
+			if(pos < max_pos -1){
+				
+
+				choose_card.SetGlobalScale(new Vector2(1,1));
+				choose_card.SetZIndex(0);
+
+				pos = pos +1;
+				choose_card = playerOneHand[pos];
+				choose_card.SetGlobalScale(new Vector2(2,2));
+				choose_card.SetZIndex(1);
+
+			}
+			else{
+
+				choose_card.SetGlobalScale(new Vector2(1,1));
+				choose_card.SetZIndex(0);
+
+				pos=0;
+				choose_card = playerOneHand[pos];
+				choose_card.SetGlobalScale(new Vector2(2,2));
+				choose_card.SetZIndex(1);
+
+			}
+
+		}
+		if(Input.IsActionJustPressed("go_left")){
+			choose_card = playerOneHand[pos];
+			if(pos > min_pos){
+
+				choose_card.SetGlobalScale(new Vector2(1,1));
+				choose_card.SetZIndex(0);
+
+				pos = pos -1;
+				choose_card = playerOneHand[pos];
+				choose_card.SetGlobalScale(new Vector2(2,2));
+				choose_card.SetZIndex(1);
+
+			}else{
+
+				choose_card.SetGlobalScale(new Vector2(1,1));
+				choose_card.SetZIndex(0);
+
+				pos= max_pos -1;
+				choose_card = playerOneHand[pos];
+				choose_card.SetGlobalScale(new Vector2(2,2));
+				choose_card.SetZIndex(1);
+
+			}
+	}
+
+		if(!fild1full){
+			if(Input.IsActionJustPressed("Card_01")){
+				choose_card.SetZIndex(0);
+				choose_card.SetGlobalPosition(field1_pos[0]);
+			}
+
+		}
+
+	}
   
  	 
   }
