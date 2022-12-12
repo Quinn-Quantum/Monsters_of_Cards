@@ -3,6 +3,11 @@ using System;
 
 public class Monster_01_2D : Area2D
 {
+  private int atk;
+  private int def;
+  private String description;
+  private String name;
+  
     Sprite _Sprite;
 
     // Called when the node enters the scene tree for the first time.
