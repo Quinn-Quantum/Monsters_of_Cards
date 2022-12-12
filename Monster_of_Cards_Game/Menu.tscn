@@ -33,12 +33,6 @@ margin_right = 63.0
 margin_bottom = 68.0
 text = "Quit"
 
-[node name="TextEdit" type="TextEdit" parent="."]
-margin_left = 381.0
-margin_top = 212.0
-margin_right = 662.0
-margin_bottom = 341.0
-
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
