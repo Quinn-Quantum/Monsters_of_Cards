@@ -42,10 +42,6 @@ public class CardGame : Node2D
 	//für Spieler zwei
 	private Vector2 hand2;
 
-
-
-	
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -131,7 +127,6 @@ public class CardGame : Node2D
 			for(int i = 0; i <=4; i++){
 			int index = random.Next(myCardList.Count);
 			var move = myCardList[index];
-
 			playerOneHand.Add(move);
 			move.SetVisible(true);
 			myCardList.RemoveAt(index);

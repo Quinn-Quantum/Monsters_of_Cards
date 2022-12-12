@@ -7,3 +7,12 @@ C:\Users\Otto\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\bin\Debug\Monst
 C:\Users\Otto\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\bin\Debug\Monster_of_Cards_Game.pdb
 C:\Users\Otto\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\obj\Debug\Monster_of_Cards_Game.dll
 C:\Users\Otto\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\obj\Debug\Monster_of_Cards_Game.pdb
+C:\Users\Otto\Documents\C#\Monsters_of_Cards\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\obj\Debug\Monster_of_Cards_Game.csproj.AssemblyReference.cache
+C:\Users\Otto\Documents\C#\Monsters_of_Cards\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\obj\Debug\Monster_of_Cards_Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Otto\Documents\C#\Monsters_of_Cards\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\obj\Debug\Monster_of_Cards_Game.AssemblyInfoInputs.cache
+C:\Users\Otto\Documents\C#\Monsters_of_Cards\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\obj\Debug\Monster_of_Cards_Game.AssemblyInfo.cs
+C:\Users\Otto\Documents\C#\Monsters_of_Cards\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\obj\Debug\Monster_of_Cards_Game.csproj.CoreCompileInputs.cache
+C:\Users\Otto\Documents\C#\Monsters_of_Cards\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\obj\Debug\Monster_of_Cards_Game.dll
+C:\Users\Otto\Documents\C#\Monsters_of_Cards\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\obj\Debug\Monster_of_Cards_Game.pdb
+C:\Users\Otto\Documents\C#\Monsters_of_Cards\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\bin\Debug\Monster_of_Cards_Game.dll
+C:\Users\Otto\Documents\C#\Monsters_of_Cards\Monsters_of_Cards\Monster_of_Cards_Game\.mono\temp\bin\Debug\Monster_of_Cards_Game.pdb

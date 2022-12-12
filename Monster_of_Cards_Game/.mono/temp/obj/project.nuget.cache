@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "I0PqCNg6LurYgG0kA4xongoGufO8oQ1+Zv6aRPgJxcTOzGSs0aKRwb8l2oztJ7hCZrRcc5bips0dofuJuI5HZg==",
+  "dgSpecHash": "PQFnu2CPw1id41/u2h8P7nASlsRtNkyOOQinIywpSN+RU1fSQqre9Rfl+pzQIlJKCkBK2FF0CUmo0VQ39QvNkw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Otto\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Otto\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.2\\microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
-    "C:\\Users\\Otto\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net472\\1.0.2\\microsoft.netframework.referenceassemblies.net472.1.0.2.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\Otto\\Documents\\C#\\Monsters_of_Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
