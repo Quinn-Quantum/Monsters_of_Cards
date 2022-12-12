@@ -52,9 +52,9 @@ public class CardGame : Node2D
     public override void _Ready()
 	{
 		hand1_pos.Add(new Vector2(200,490));
-		hand1_pos.Add(new Vector2(200,490));
-		hand1_pos.Add(new Vector2(200,490));
-		hand1_pos.Add(new Vector2(200,490));
+		hand1_pos.Add(new Vector2(300,490));
+		hand1_pos.Add(new Vector2(400,490));
+		hand1_pos.Add(new Vector2(500,490));
 		hand1_pos.Add(new Vector2(600,490));
 		hand1_pos.Add(new Vector2(700,490));
 		//Zeilen für Karten
