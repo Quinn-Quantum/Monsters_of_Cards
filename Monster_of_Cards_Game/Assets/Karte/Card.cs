@@ -13,11 +13,9 @@ public class Card : Node2D
 
 	// Called when the node enters the scene tree for the first time.
 	private List<string> myTextureList = new List<string>();
-	
-	
-	
 
-	public override void _Ready()
+    [Obsolete]
+    public override void _Ready()
 	{
 		myTextureList.Add("res://Assets/Monsters/Monster_01.png");
 		myTextureList.Add("res://Assets/Monsters/Monster_02.png");
@@ -33,11 +31,11 @@ public class Card : Node2D
 		Random random = new Random();
 		int index = random.Next(myTextureList.Count);
 		Godot.Sprite cartSprite =  this.GetNode<Godot.Sprite>("Card_Sprite");
-		
-		
 
+		var vec2 = new Vector2(300,300);
+		this.SetPosition(vec2);
 		//var texture = (Texture)GD.Load("res://Assets/Monsters/Monster_02.png"); // resource is loaded when line is executed
-		GD.Print(myTextureList[index]);
+		
 
 
 	}
