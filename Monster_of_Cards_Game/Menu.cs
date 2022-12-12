@@ -21,7 +21,7 @@ public class Menu : Control
 
 	private void _on_StartButton_pressed()
 	{
-		GetTree().ChangeScene("res://MainScene.tscn");
+		GetTree().ChangeScene("res://Szene/CardGame.tscn");
 	}
 
 	private void _on_OptionsButton_pressed()

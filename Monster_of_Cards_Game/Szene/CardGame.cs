@@ -29,6 +29,12 @@ public class CardGame : Node2D
 	private Monster_01_2D  _Monster12;
 	private Monster_01_2D  _Monster13;
 
+	private int activePlayer = 1;
+	private int nextPlayer = 2;
+
+	private Button _EndTurnButton;
+	private Button _StartTurnButton;
+
 	//Für Spieler eins
 	private List<Monster_01_2D> myCardList = new List<Monster_01_2D>();
 
@@ -45,13 +51,17 @@ public class CardGame : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-		hand1_pos.Add(new Vector2(60,400));
-		hand1_pos.Add(new Vector2(160,400));
-		hand1_pos.Add(new Vector2(260,400));
-		hand1_pos.Add(new Vector2(360,400));
-		hand1_pos.Add(new Vector2(460,400));
-		hand1_pos.Add(new Vector2(560,400));
-		
+		hand1_pos.Add(new Vector2(200,490));
+		hand1_pos.Add(new Vector2(200,490));
+		hand1_pos.Add(new Vector2(200,490));
+		hand1_pos.Add(new Vector2(200,490));
+		hand1_pos.Add(new Vector2(600,490));
+		hand1_pos.Add(new Vector2(700,490));
+		//Zeilen für Karten
+		//Spieler 2 Handkarten	y=100
+		//Spieler 2 Feld		y=230
+		//Spieler 1 Feld		y=360
+		//Spieler 1 Handkarten	y=490
 		
 		
 		_Monster01 = GetNode<Monster_01_2D>("Monster_01");
@@ -108,10 +118,11 @@ public class CardGame : Node2D
 		myCardList.Add(_Monster13);
 
 
-		number_cards_in_deck = GetNode<deck_number>("deck_number");
+		number_cards_in_deck = GetNode<deck_number>("Card_back/deck_number");
 		number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
 		
-		
+		_EndTurnButton = GetNode<Button>("EndTurnButton");
+		_StartTurnButton = GetNode<Button>("StartTurnButton");
 			
 			//test.Translation= Vector2(10*i, 10*i);
 		}
@@ -155,6 +166,18 @@ public class CardGame : Node2D
   
  	 
   }
-		
+
+  private void _on_EndTurnButton_pressed() {
+	foreach (var item in playerOneHand)
+	{
+		item.SetVisible(false);
 	}
-  
+	_StartTurnButton.SetVisible(true);
+	_EndTurnButton.SetVisible(false);
+  }
+
+  private void _on_StartTurnButton_pressed() {
+
+  }
+
+}
