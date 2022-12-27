@@ -30,22 +30,32 @@ public class CardGame : Node2D
 	private Monster_01_2D  _Monster13;
 
 	private Vector2 _scaler= new Vector2(0.2f,0.2f);
-	private Vector2 _scalerBig = new Vector2(0.5f,0.5f);
+	private Vector2 _scalerBig = new Vector2(0.4f,0.4f);
+	private Random random;
+//Bool for Ablauf
+	private bool firsRound = true;
+	private bool drawCard = false;
+	private bool playCardTime = false;
+	private bool cardhighlighted = false;
 
-	private bool startDraw=false;
+	private bool battelTime = false;
+
+
 
 	//for player one
+	private bool playerOne = true; //if it is Player one turne
+	private bool firstDrawPlayerOne = true;
 	private List<Monster_01_2D> myCardList = new List<Monster_01_2D>();
 
 	private List<Monster_01_2D> playerOneHand = new List<Monster_01_2D>();
 	private Monster_01_2D choose_card;
 	private deck_number number_cards_in_deck;
 
-	private bool firstDrawPlayerOne = true;
+	
 	//Hand Positionen
 	private List<Vector2> hand1_pos = new List<Vector2>();
-	private bool cardhighlighted = false;
-	private int pos ;
+	
+	private int pos;
 	private int max_pos;
 	private int min_pos = 0;
 	//Feld Player one
@@ -55,12 +65,16 @@ public class CardGame : Node2D
 	private  List<Monster_01_2D> card_fild1 = new List<Monster_01_2D>();
 
 	//for player two
+	private bool playerTowe = false; //if it is Player one turne
+	private bool firstDrawPlayerTowe = true;
 	private Vector2 hand2;
 
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+
+		
 		
 		//Hand Positionen Player one
 		hand1_pos.Add(new Vector2(60,400));
@@ -107,46 +121,96 @@ public class CardGame : Node2D
 		//
 		number_cards_in_deck = GetNode<deck_number>("deck_number");
 		number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+		GD.Randomize();
+		random = new Random();
 		
 		}
 		// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
 	{
-
-
-		if(Input.IsActionJustPressed("draw")){
-		GD.Randomize();
-		Random random = new Random();
-		if(firstDrawPlayerOne){
-			for(int i = 0; i <=4; i++){
-			int index = random.Next(myCardList.Count);
-			var move = myCardList[index];
-			playerOneHand.Add(move);
-			move.SetVisible(true);
-			myCardList.RemoveAt(index);
-			number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
-			
-			}
-			firstDrawPlayerOne = false;
-		}
-		else if(startDraw){
-			int index_n = random.Next(myCardList.Count);
-			var move = myCardList[index_n];
-			move.SetVisible(true);
-			
-			myCardList.RemoveAt(index_n);
-			playerOneHand.Add(move);
-			number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
-
-			startDraw=!startDraw;
-		}
 		
-			sortHandCards();
+		if(Input.IsActionJustPressed("draw")){			
+			//erster zug
+			if(firstDrawPlayerOne || firstDrawPlayerTowe){				
+					if(playerOne && firstDrawPlayerOne){
+						for(int i = 0; i <=4; i++){
+							int index = random.Next(myCardList.Count);
+							var move = myCardList[index];
+							playerOneHand.Add(move);
+							move.SetVisible(true);
+							myCardList.RemoveAt(index);
+							number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+						
+						}
+						firstDrawPlayerOne = false;
+						sortHandCards();
+						playCardTime=true;
 
+					}
+					else if(playerTowe && firstDrawPlayerTowe){
+						//Umschreiben für Speiler zwei
+						/*for(int i = 0; i <=4; i++){
+							int index = random.Next(myCardList.Count);
+							var move = myCardList[index];
+							playerOneHand.Add(move);
+							move.SetVisible(true);
+							myCardList.RemoveAt(index);
+							number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+						
+						}*/
+						firstDrawPlayerTowe = false;
+						sortHandCards();
+						playCardTime=true;
+
+					}
+					else{
+						GD.Print("Falsche Taste");
+					}
+				}
+
+			//alleweiteren Züge
+			else if(!playCardTime){
+				if(playerOne && drawCard){
+					int index_n = random.Next(myCardList.Count);
+					var move = myCardList[index_n];
+					move.SetVisible(true);
+					
+					myCardList.RemoveAt(index_n);
+					playerOneHand.Add(move);
+					number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+
+					drawCard=!drawCard;
+					sortHandCards();
+					playCardTime=true;
+
+				}
+				else if (playerTowe && drawCard){
+
+					int index_n = random.Next(myCardList.Count);
+					var move = myCardList[index_n];
+					move.SetVisible(true);
+					
+					myCardList.RemoveAt(index_n);
+					playerOneHand.Add(move);
+					number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+
+					drawCard=!drawCard;
+					sortHandCards();
+					playCardTime=true;
+			
+				}
+				else{
+					GD.Print("Falsche Taste2");
+				}
+			}
+		else{
+			GD.Print("kannst nicht ziehen");
+		}
 	}
+
 	//Haver card
 	max_pos = playerOneHand.Count;
-	if(!cardhighlighted){
+	if(!cardhighlighted && playCardTime){
 	if(Input.IsActionJustPressed("Active")){
 			pos = 0;
 			choose_card = playerOneHand[pos];
@@ -159,9 +223,9 @@ public class CardGame : Node2D
 
 	}
 
-	else if(cardhighlighted){
+	else if(cardhighlighted && playCardTime ){
 		
-		if(Input.IsActionJustPressed("go_right")){
+		if(Input.IsActionJustPressed("go_right") ){
 		choose_card = playerOneHand[pos];
 			if(pos < max_pos -1){
 				
@@ -214,7 +278,7 @@ public class CardGame : Node2D
 	}
 
 	//play a card
-		if(!fild1full){
+		if(!fild1full && playCardTime){
 			
 			if(Input.IsActionJustPressed("Active")){
 				choose_card.SetZIndex(0);
@@ -224,6 +288,7 @@ public class CardGame : Node2D
 				playerOneHand.Remove(choose_card);
 
 				sortHandCards();
+				playCardTime=!playCardTime;
 
 				if(fill_number <2){
 					fill_number ++;
@@ -231,7 +296,13 @@ public class CardGame : Node2D
 				else{
 					fild1full = !fild1full;
 				}
+
+				if(playerTowe && firsRound){
+					firsRound=false;
+					nextplayer();
+				}
 				
+
 			}
 
 		}
@@ -239,6 +310,10 @@ public class CardGame : Node2D
 	}
   	 
   }
+
+	public void nextplayer(){
+		GD.Print("Hi");
+	}
 
 	public void sortHandCards(){
 
@@ -260,6 +335,8 @@ public class CardGame : Node2D
 		return card;
 
 	}
+
+
 		
 }
   
