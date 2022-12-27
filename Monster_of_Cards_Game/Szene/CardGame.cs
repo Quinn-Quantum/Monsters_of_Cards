@@ -29,14 +29,16 @@ public class CardGame : Node2D
 	private Monster_01_2D  _Monster12;
 	private Monster_01_2D  _Monster13;
 
-	//Für Spieler eins
+	private bool startDraw=false;
+
+	//for player one
 	private List<Monster_01_2D> myCardList = new List<Monster_01_2D>();
 
 	private List<Monster_01_2D> playerOneHand = new List<Monster_01_2D>();
 	private Monster_01_2D choose_card;
 	private deck_number number_cards_in_deck;
 
-	private bool firstDraw = true;
+	private bool firstDrawPlayerOne = true;
 	//Hand Positionen
 	private List<Vector2> hand1_pos = new List<Vector2>();
 	private bool cardhighlighted = false;
@@ -45,9 +47,11 @@ public class CardGame : Node2D
 	private int min_pos = 0;
 	//Feld Player one
 	private List<Vector2> field1_pos = new List<Vector2>();
+	int fill_number=0;
 	private bool fild1full=false;
+	private  List<Monster_01_2D> card_fild1 = new List<Monster_01_2D>();
 	
-	//für Spieler zwei
+	//for player two
 	private Vector2 hand2;
 
 
@@ -65,12 +69,12 @@ public class CardGame : Node2D
 		//Feld Positionen Player one
 		field1_pos.Add(new Vector2(100,200));
 		field1_pos.Add(new Vector2(260,200));
-		field1_pos.Add(new Vector2(360,200));
+		field1_pos.Add(new Vector2(420,200));
 		
 		
 		//Dec Player one
-		_Monster01 = GetNode<Monster_01_2D>("Monster_01");
-		_Monster01._SetImage("res://Assets/Monsters/Monster_01.png");
+
+		_Monster01 = crateCard("Monster_01","res://Assets/Monsters/Monster_01.png",3,3, "Test","Hallo Welt");
 		
 		_Monster02 = GetNode<Monster_01_2D>("Monster_02");
 		_Monster02._SetImage("res://Assets/Monsters/Monster_02.png");
@@ -126,9 +130,6 @@ public class CardGame : Node2D
 		number_cards_in_deck = GetNode<deck_number>("deck_number");
 		number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
 		
-		
-			
-			//test.Translation= Vector2(10*i, 10*i);
 		}
 		// Called every frame. 'delta' is the elapsed time since the previous frame.
   public override void _Process(float delta)
@@ -138,7 +139,7 @@ public class CardGame : Node2D
      if(Input.IsActionJustPressed("draw")){
 		GD.Randomize();
 		Random random = new Random();
-		if(firstDraw){
+		if(firstDrawPlayerOne){
 			for(int i = 0; i <=4; i++){
 			int index = random.Next(myCardList.Count);
 			var move = myCardList[index];
@@ -148,9 +149,9 @@ public class CardGame : Node2D
 			number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
 			
 			}
-			firstDraw = false;
+			firstDrawPlayerOne = false;
 		}
-		else{
+		else if(startDraw){
 			int index_n = random.Next(myCardList.Count);
 			var move = myCardList[index_n];
 			move.SetVisible(true);
@@ -158,18 +159,17 @@ public class CardGame : Node2D
 			myCardList.RemoveAt(index_n);
 			playerOneHand.Add(move);
 			number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+
+			startDraw=!startDraw;
 		}
 		
-			for(int k=0; k<playerOneHand.Count; k++){
-
-				var card = playerOneHand[k];
-				card.SetGlobalPosition(hand1_pos[k]);
-  			}
+			sortHandCards();
 
   }
+  //Haver card
   max_pos = playerOneHand.Count;
   if(!cardhighlighted){
-	if(Input.IsActionJustPressed("Card_01")){
+	if(Input.IsActionJustPressed("Active")){
 			pos = 0;
 			choose_card = playerOneHand[pos];
 			GD.Print(choose_card.GetScale());
@@ -237,10 +237,25 @@ public class CardGame : Node2D
 			}
 	}
 
+//play a card
 		if(!fild1full){
-			if(Input.IsActionJustPressed("Card_01")){
+			
+			if(Input.IsActionJustPressed("Active")){
 				choose_card.SetZIndex(0);
-				choose_card.SetGlobalPosition(field1_pos[0]);
+				choose_card.SetGlobalScale(new Vector2(1,1));
+				choose_card.SetGlobalPosition(field1_pos[fill_number]);
+				card_fild1.Add(choose_card);
+				playerOneHand.Remove(choose_card);
+
+				sortHandCards();
+
+				if(fill_number <2){
+					fill_number ++;
+				}
+				else{
+					fild1full=true;
+				}
+				
 			}
 
 		}
@@ -248,6 +263,27 @@ public class CardGame : Node2D
 	}
   
  	 
+  }
+
+  public void sortHandCards(){
+
+	for(int k=0; k<playerOneHand.Count; k++){
+
+				var card = playerOneHand[k];
+				card.SetGlobalPosition(hand1_pos[k]);
+  			}
+
+  }
+
+  public Monster_01_2D crateCard(String cardId, String imagePath, int atk, int def,String name, String disciption ){
+	Monster_01_2D card= GetNode<Monster_01_2D>(cardId);
+	card._SetImage(imagePath);
+	card._SetAtk(atk);
+	card._SetDef(def);
+	card._SetName(name);
+	card._SetDescription(disciption);
+	return card;
+
   }
 		
 	}

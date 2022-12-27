@@ -3,8 +3,9 @@ Alle Karten liegen im Tree unter dem spielplan.
 
 Beim start werden sie Geladen, aber ihre Sichtbarkeit ist auf Flase.
 
-Es gibt eine Szene namens Kartenstapel. Klickt der spieler darauf wird eine Karte gezogen.
-Karte wird sichtbar und kommt in die Hand.
+Es gibt eine Szene namens Kartenstapel. 
+Mit "D" werden Karten gezogen.
+Mit "A" wird eine Karte hevorgehoben und kann mit "A" gespielt werden.
 
 Karten sollten Area2d sein.
 

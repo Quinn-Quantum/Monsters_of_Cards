@@ -44,4 +44,21 @@ public class Monster_01_2D : Area2D
         _Sprite.Texture = t;
 
     }
+
+  public void _SetAtk(int _atk){
+    atk = _atk;
+  }
+
+  public void _SetDef(int _def){
+    def = _def;
+  }
+
+  public void _SetDescription(String _description){
+    description=_description;
+  }
+
+  public void _SetName(String _name){
+    name=_name;
+  }
+  
 }
