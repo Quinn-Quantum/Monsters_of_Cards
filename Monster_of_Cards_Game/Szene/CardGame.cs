@@ -12,7 +12,7 @@ public class CardGame : Node2D
 {
 
 	//All Cards
-	
+
 	public PackedScene simultaneousScene ;
 
 	private Monster_01_2D  _Monster01;
@@ -53,13 +53,13 @@ public class CardGame : Node2D
 	int fill_number=0;
 	private bool fild1full=false;
 	private  List<Monster_01_2D> card_fild1 = new List<Monster_01_2D>();
-	
+
 	//for player two
 	private Vector2 hand2;
 
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
 	{
 		
 		//Hand Positionen Player one
@@ -110,11 +110,11 @@ public class CardGame : Node2D
 		
 		}
 		// Called every frame. 'delta' is the elapsed time since the previous frame.
-  public override void _Process(float delta)
-  {
+	public override void _Process(float delta)
+	{
 
-	
-     if(Input.IsActionJustPressed("draw")){
+
+		if(Input.IsActionJustPressed("draw")){
 		GD.Randomize();
 		Random random = new Random();
 		if(firstDrawPlayerOne){
@@ -143,10 +143,10 @@ public class CardGame : Node2D
 		
 			sortHandCards();
 
-  }
-  //Haver card
-  max_pos = playerOneHand.Count;
-  if(!cardhighlighted){
+	}
+	//Haver card
+	max_pos = playerOneHand.Count;
+	if(!cardhighlighted){
 	if(Input.IsActionJustPressed("Active")){
 			pos = 0;
 			choose_card = playerOneHand[pos];
@@ -157,9 +157,7 @@ public class CardGame : Node2D
 			cardhighlighted = true;
 	}
 
-	
-
-  }
+	}
 
 	else if(cardhighlighted){
 		
@@ -168,7 +166,7 @@ public class CardGame : Node2D
 			if(pos < max_pos -1){
 				
 
-				choose_card.SetGlobalScale(new Vector2(_scaler));
+				choose_card.SetGlobalScale(_scaler);
 				choose_card.SetZIndex(0);
 
 				pos = pos +1;
@@ -179,7 +177,7 @@ public class CardGame : Node2D
 			}
 			else{
 
-				choose_card.SetGlobalScale(new Vector2(_scaler));
+				choose_card.SetGlobalScale(_scaler);
 				choose_card.SetZIndex(0);
 
 				pos=0;
@@ -215,7 +213,7 @@ public class CardGame : Node2D
 			}
 	}
 
-//play a card
+	//play a card
 		if(!fild1full){
 			
 			if(Input.IsActionJustPressed("Active")){
@@ -231,7 +229,7 @@ public class CardGame : Node2D
 					fill_number ++;
 				}
 				else{
-					fild1full=true;
+					fild1full = !fild1full;
 				}
 				
 			}
@@ -239,30 +237,29 @@ public class CardGame : Node2D
 		}
 
 	}
-  
- 	 
+  	 
   }
 
-  public void sortHandCards(){
+	public void sortHandCards(){
 
 	for(int k=0; k<playerOneHand.Count; k++){
 
-				var card = playerOneHand[k];
-				card.SetGlobalPosition(hand1_pos[k]);
-  			}
+			var card = playerOneHand[k];
+			card.SetGlobalPosition(hand1_pos[k]);
+		}
 
-  }
-
-  public Monster_01_2D crateCard(String cardId, String imagePath, int atk, int def,String name, String disciption ){
-	Monster_01_2D card= GetNode<Monster_01_2D>(cardId);
-	card._SetImage(imagePath);
-	card._SetAtk(atk);
-	card._SetDef(def);
-	card._SetName(name);
-	card._SetDescription(disciption);
-	return card;
-
-  }
-		
 	}
+
+	public Monster_01_2D crateCard(String cardId, String imagePath, int atk, int def,String name, String disciption ){
+		Monster_01_2D card= GetNode<Monster_01_2D>(cardId);
+		card._SetImage(imagePath);
+		card._SetAtk(atk);
+		card._SetDef(def);
+		card._SetName(name);
+		card._SetDescription(disciption);
+		return card;
+
+	}
+		
+}
   
