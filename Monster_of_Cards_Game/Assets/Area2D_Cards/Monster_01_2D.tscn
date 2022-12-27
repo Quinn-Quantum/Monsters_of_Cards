@@ -1,22 +1,54 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Monsters/Monster_01.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Area2D_Cards/Monster_01_2D.cs" type="Script" id=2]
 [ext_resource path="res://Assets/Area2D_Cards/Sprite.cs" type="Script" id=3]
+[ext_resource path="res://ARLRDBD.TTF" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/Area2D_Cards/Label_Discription.cs" type="Script" id=5]
+[ext_resource path="res://Assets/Area2D_Cards/Label_Name.cs" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 53.5, 79.5 )
+extents = Vector2( 265, 355 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 28
+outline_color = Color( 0.996078, 0.996078, 0.996078, 1 )
+font_data = ExtResource( 4 )
 
 [node name="Monster_01_2D" type="Area2D"]
-visible = false
+scale = Vector2( 0.2, 0.2 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 3.8147e-06, 7.62939e-06 )
-scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.5, 0.5 )
+position = Vector2( -5.00002, -24.9999 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
+
+[node name="Label_Name" type="RichTextLabel" parent="."]
+self_modulate = Color( 0.0431373, 0, 0, 1 )
+margin_left = -275.0
+margin_top = -420.0
+margin_right = 235.0
+margin_bottom = -390.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_text = "Hallo Welt"
+text = "Hallo Welt"
+fit_content_height = true
+script = ExtResource( 6 )
+
+[node name="Label_Discription" type="RichTextLabel" parent="."]
+self_modulate = Color( 0.0431373, 0, 0, 1 )
+margin_left = -275.0
+margin_top = 225.0
+margin_right = 235.0
+margin_bottom = 420.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_text = "Hallo Welt"
+text = "Hallo Welt"
+fit_content_height = true
+script = ExtResource( 5 )

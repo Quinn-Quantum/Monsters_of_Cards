@@ -29,6 +29,9 @@ public class CardGame : Node2D
 	private Monster_01_2D  _Monster12;
 	private Monster_01_2D  _Monster13;
 
+	private Vector2 _scaler= new Vector2(0.2f,0.2f);
+	private Vector2 _scalerBig = new Vector2(0.5f,0.5f);
+
 	private bool startDraw=false;
 
 	//for player one
@@ -71,46 +74,21 @@ public class CardGame : Node2D
 		field1_pos.Add(new Vector2(260,200));
 		field1_pos.Add(new Vector2(420,200));
 		
-		
 		//Dec Player one
 
 		_Monster01 = crateCard("Monster_01","res://Assets/Monsters/Monster_01.png",3,3, "Test","Hallo Welt");
-		
-		_Monster02 = GetNode<Monster_01_2D>("Monster_02");
-		_Monster02._SetImage("res://Assets/Monsters/Monster_02.png");
-
-		_Monster03 = GetNode<Monster_01_2D>("Monster_03");
-		_Monster03._SetImage("res://Assets/Monsters/Monster_03.png");
-
-		_Monster04 = GetNode<Monster_01_2D>("Monster_04");
-		_Monster04._SetImage("res://Assets/Monsters/Monster_04.png");
-
-		_Monster05 = GetNode<Monster_01_2D>("Monster_05");
-		_Monster05._SetImage("res://Assets/Monsters/Monster_05.png");
-
-		_Monster06 = GetNode<Monster_01_2D>("Monster_06");
-		_Monster06._SetImage("res://Assets/Monsters/Monster_06.png");
-
-		_Monster07 = GetNode<Monster_01_2D>("Monster_07");
-		_Monster07._SetImage("res://Assets/Monsters/Monster_07.png");
-
-		_Monster08 = GetNode<Monster_01_2D>("Monster_08");
-		_Monster08._SetImage("res://Assets/Monsters/Monster_08.png");
-
-		_Monster09 = GetNode<Monster_01_2D>("Monster_09");
-		_Monster09._SetImage("res://Assets/Monsters/Monster_09.png");
-
-		_Monster10 = GetNode<Monster_01_2D>("Monster_10");
-		_Monster10._SetImage("res://Assets/Monsters/Monster_10.png");
-
-		_Monster11 = GetNode<Monster_01_2D>("Monster_11");
-		_Monster11._SetImage("res://Assets/Monsters/Monster_11.png");
-
-		_Monster12 = GetNode<Monster_01_2D>("Monster_12");
-		_Monster12._SetImage("res://Assets/Monsters/Monster_12.png");
-
-		_Monster13 = GetNode<Monster_01_2D>("Monster_13");
-		_Monster13._SetImage("res://Assets/Monsters/Monster_13.png");
+		_Monster02 = crateCard("Monster_02","res://Assets/Monsters/Monster_02.png",3,3, "Name","Hallo Welt");
+		_Monster03 = crateCard("Monster_03","res://Assets/Monsters/Monster_03.png",3,3, "Name","Hallo Welt, was Geht so ab?");
+		_Monster04 = crateCard("Monster_04","res://Assets/Monsters/Monster_04.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster05 = crateCard("Monster_05","res://Assets/Monsters/Monster_05.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster06 = crateCard("Monster_06","res://Assets/Monsters/Monster_06.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster07 = crateCard("Monster_07","res://Assets/Monsters/Monster_07.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster08 = crateCard("Monster_08","res://Assets/Monsters/Monster_08.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster09 = crateCard("Monster_09","res://Assets/Monsters/Monster_09.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster10 = crateCard("Monster_10","res://Assets/Monsters/Monster_10.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster11 = crateCard("Monster_11","res://Assets/Monsters/Monster_11.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster12 = crateCard("Monster_12","res://Assets/Monsters/Monster_12.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster13 = crateCard("Monster_13","res://Assets/Monsters/Monster_13.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
 
 		myCardList.Add(_Monster01);
 		myCardList.Add(_Monster02);
@@ -174,7 +152,7 @@ public class CardGame : Node2D
 			choose_card = playerOneHand[pos];
 			GD.Print(choose_card.GetScale());
 
-			choose_card.SetGlobalScale(new Vector2(2,2));
+			choose_card.SetGlobalScale(_scalerBig);
 			choose_card.SetZIndex(1);
 			cardhighlighted = true;
 	}
@@ -190,23 +168,23 @@ public class CardGame : Node2D
 			if(pos < max_pos -1){
 				
 
-				choose_card.SetGlobalScale(new Vector2(1,1));
+				choose_card.SetGlobalScale(new Vector2(_scaler));
 				choose_card.SetZIndex(0);
 
 				pos = pos +1;
 				choose_card = playerOneHand[pos];
-				choose_card.SetGlobalScale(new Vector2(2,2));
+				choose_card.SetGlobalScale(_scalerBig);
 				choose_card.SetZIndex(1);
 
 			}
 			else{
 
-				choose_card.SetGlobalScale(new Vector2(1,1));
+				choose_card.SetGlobalScale(new Vector2(_scaler));
 				choose_card.SetZIndex(0);
 
 				pos=0;
 				choose_card = playerOneHand[pos];
-				choose_card.SetGlobalScale(new Vector2(2,2));
+				choose_card.SetGlobalScale(_scalerBig);
 				choose_card.SetZIndex(1);
 
 			}
@@ -216,22 +194,22 @@ public class CardGame : Node2D
 			choose_card = playerOneHand[pos];
 			if(pos > min_pos){
 
-				choose_card.SetGlobalScale(new Vector2(1,1));
+				choose_card.SetGlobalScale(_scaler);
 				choose_card.SetZIndex(0);
 
 				pos = pos -1;
 				choose_card = playerOneHand[pos];
-				choose_card.SetGlobalScale(new Vector2(2,2));
+				choose_card.SetGlobalScale(_scalerBig);
 				choose_card.SetZIndex(1);
 
 			}else{
 
-				choose_card.SetGlobalScale(new Vector2(1,1));
+				choose_card.SetGlobalScale(_scaler);
 				choose_card.SetZIndex(0);
 
 				pos= max_pos -1;
 				choose_card = playerOneHand[pos];
-				choose_card.SetGlobalScale(new Vector2(2,2));
+				choose_card.SetGlobalScale(_scalerBig);
 				choose_card.SetZIndex(1);
 
 			}
@@ -242,7 +220,7 @@ public class CardGame : Node2D
 			
 			if(Input.IsActionJustPressed("Active")){
 				choose_card.SetZIndex(0);
-				choose_card.SetGlobalScale(new Vector2(1,1));
+				choose_card.SetGlobalScale(_scaler);
 				choose_card.SetGlobalPosition(field1_pos[fill_number]);
 				card_fild1.Add(choose_card);
 				playerOneHand.Remove(choose_card);

@@ -7,28 +7,29 @@ public class Monster_01_2D : Area2D
   private int def;
   private String description;
   private String name;
+
   
-    Sprite _Sprite;
+  
+  Sprite _Sprite;
+
+  Label_Name _Name;
+  Label_Discription _Discription;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
       _Sprite = GetNode<Sprite>("Sprite");
-        // Image i = new Image();
-        // i.Lock();
+      _Name = GetNode<Label_Name>("Label_Name");
+      _Discription = GetNode<Label_Discription>("Label_Discription");
 
-        // ImageTexture t = new ImageTexture();
-        // i.Load("res://Assets/Monsters/Monster_04.png");
-        
-        // i.Unlock();
-        // t.CreateFromImage(i);
-        // _Sprite.Texture = t;
         
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
   public override void _Process(float delta)
   {
+   _Name.SetText(name);
+   _Discription.SetText(description);
     
   }
 
