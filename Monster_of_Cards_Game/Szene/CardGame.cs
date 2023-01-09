@@ -15,42 +15,62 @@ public class CardGame : Node2D
 	
 	public PackedScene simultaneousScene ;
 
-	private Monster_01_2D  _Monster01;
-	private Monster_01_2D  _Monster02;
-	private Monster_01_2D  _Monster03;
-	private Monster_01_2D  _Monster04;
-	private Monster_01_2D  _Monster05;
-	private Monster_01_2D  _Monster06;
-	private Monster_01_2D  _Monster07;
-	private Monster_01_2D  _Monster08;
-	private Monster_01_2D  _Monster09;
-	private Monster_01_2D  _Monster10;
-	private Monster_01_2D  _Monster11;
-	private Monster_01_2D  _Monster12;
-	private Monster_01_2D  _Monster13;
+    private Monster_01_2D  _Monster01;
+    private Monster_01_2D  _Monster02;
+    private Monster_01_2D  _Monster03;
+    private Monster_01_2D  _Monster04;
+    private Monster_01_2D  _Monster05;
+    private Monster_01_2D  _Monster06;
+    private Monster_01_2D  _Monster07;
+    private Monster_01_2D  _Monster08;
+    private Monster_01_2D  _Monster09;
+    private Monster_01_2D  _Monster10;
+    private Monster_01_2D  _Monster11;
+    private Monster_01_2D  _Monster12;
+    private Monster_01_2D  _Monster13;
 
-	private int activePlayer = 1;
-	private int nextPlayer = 2;
+    private Vector2 _scaler= new Vector2(0.2f,0.2f);
+    private Vector2 _scalerBig = new Vector2(0.4f,0.4f);
+    private Random random;
+//Bool for Ablauf
+    private bool firsRound = true;
+    private bool drawCard = false;
+    private bool playCardTime = false;
+    private bool cardhighlighted = false;
+
+    private bool battelTime = false;
+
+
+
+    //for player one
+    private bool playerOne = true; //if it is Player one turne
+    private bool firstDrawPlayerOne = true;
+    private List<Monster_01_2D> myCardList = new List<Monster_01_2D>();
+
+    private List<Monster_01_2D> playerOneHand = new List<Monster_01_2D>();
+    private Monster_01_2D choose_card;
+    private deck_number number_cards_in_deck;
+
+
+    //Hand Positionen
+    private List<Vector2> hand1_pos = new List<Vector2>();
+
+    private int pos;
+    private int max_pos;
+    private int min_pos = 0;
+    //Feld Player one
+    private List<Vector2> field1_pos = new List<Vector2>();
+    int fill_number=0;
+    private bool fild1full=false;
+    private  List<Monster_01_2D> card_fild1 = new List<Monster_01_2D>();
+
+    //for player two
+    private bool playerTowe = false; //if it is Player one turne
+    private bool firstDrawPlayerTowe = true;
+    private Vector2 hand2;
 
 	private Button _EndTurnButton;
 	private Button _StartTurnButton;
-
-
-	//Für Spieler eins
-	private List<Monster_01_2D> myCardList1 = new List<Monster_01_2D>();
-	private List<Monster_01_2D> playerOneHand = new List<Monster_01_2D>();
-	private deck_number number_cards_in_deck1;
-	private bool firstDraw = true;
-	//Hand Positionen Spieler 1
-	private List<Vector2> hand1_pos = new List<Vector2>();
-	
-
-	//für Spieler zwei
-	private List<Monster_01_2D> myCardList2 = new List<Monster_01_2D>();
-	private List<Monster_01_2D> playerTwoHand = new List<Monster_01_2D>();
-	private deck_number number_cards_in_deck2;
-	//Hand Positionen Spieler 2
-	private List<Vector2> hand2_pos = new List<Vector2>();
 
 
     // Called when the node enters the scene tree for the first time.
@@ -68,6 +88,7 @@ public class CardGame : Node2D
 		//Spieler 1 Feld		y=360
 		//Spieler 1 Handkarten	y=490
 
+		//ToDo
 		hand2_pos.Add(new Vector2(200,100));
 		hand2_pos.Add(new Vector2(300,100));
 		hand2_pos.Add(new Vector2(400,100));
@@ -76,44 +97,19 @@ public class CardGame : Node2D
 		hand2_pos.Add(new Vector2(700,100));
 		
 		
-		_Monster01 = GetNode<Monster_01_2D>("Monster_01");
-		_Monster01._SetImage("res://Assets/Monsters/Monster_01.png");
-		
-		_Monster02 = GetNode<Monster_01_2D>("Monster_02");
-		_Monster02._SetImage("res://Assets/Monsters/Monster_02.png");
-
-		_Monster03 = GetNode<Monster_01_2D>("Monster_03");
-		_Monster03._SetImage("res://Assets/Monsters/Monster_03.png");
-
-		_Monster04 = GetNode<Monster_01_2D>("Monster_04");
-		_Monster04._SetImage("res://Assets/Monsters/Monster_04.png");
-
-		_Monster05 = GetNode<Monster_01_2D>("Monster_05");
-		_Monster05._SetImage("res://Assets/Monsters/Monster_05.png");
-
-		_Monster06 = GetNode<Monster_01_2D>("Monster_06");
-		_Monster06._SetImage("res://Assets/Monsters/Monster_06.png");
-
-		_Monster07 = GetNode<Monster_01_2D>("Monster_07");
-		_Monster07._SetImage("res://Assets/Monsters/Monster_07.png");
-
-		_Monster08 = GetNode<Monster_01_2D>("Monster_08");
-		_Monster08._SetImage("res://Assets/Monsters/Monster_08.png");
-
-		_Monster09 = GetNode<Monster_01_2D>("Monster_09");
-		_Monster09._SetImage("res://Assets/Monsters/Monster_09.png");
-
-		_Monster10 = GetNode<Monster_01_2D>("Monster_10");
-		_Monster10._SetImage("res://Assets/Monsters/Monster_10.png");
-
-		_Monster11 = GetNode<Monster_01_2D>("Monster_11");
-		_Monster11._SetImage("res://Assets/Monsters/Monster_11.png");
-
-		_Monster12 = GetNode<Monster_01_2D>("Monster_12");
-		_Monster12._SetImage("res://Assets/Monsters/Monster_12.png");
-
-		_Monster13 = GetNode<Monster_01_2D>("Monster_13");
-		_Monster13._SetImage("res://Assets/Monsters/Monster_13.png");
+		_Monster01 = crateCard("Monster_01","res://Assets/Monsters/Monster_01.png",3,3, "Test","Hallo Welt");
+        _Monster02 = crateCard("Monster_02","res://Assets/Monsters/Monster_02.png",3,3, "Name","Hallo Welt");
+        _Monster03 = crateCard("Monster_03","res://Assets/Monsters/Monster_03.png",3,3, "Name","Hallo Welt, was Geht so ab?");
+        _Monster04 = crateCard("Monster_04","res://Assets/Monsters/Monster_04.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+        _Monster05 = crateCard("Monster_05","res://Assets/Monsters/Monster_05.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+        _Monster06 = crateCard("Monster_06","res://Assets/Monsters/Monster_06.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+        _Monster07 = crateCard("Monster_07","res://Assets/Monsters/Monster_07.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+        _Monster08 = crateCard("Monster_08","res://Assets/Monsters/Monster_08.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+        _Monster09 = crateCard("Monster_09","res://Assets/Monsters/Monster_09.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+        _Monster10 = crateCard("Monster_10","res://Assets/Monsters/Monster_10.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+        _Monster11 = crateCard("Monster_11","res://Assets/Monsters/Monster_11.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+        _Monster12 = crateCard("Monster_12","res://Assets/Monsters/Monster_12.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+        _Monster13 = crateCard("Monster_13","res://Assets/Monsters/Monster_13.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
 
 		myCardList1.Add(_Monster01);
 		myCardList1.Add(_Monster02);
@@ -156,45 +152,220 @@ public class CardGame : Node2D
 			//test.Translation= Vector2(10*i, 10*i);
 		}
 		// Called every frame. 'delta' is the elapsed time since the previous frame.
+
+	public void nextplayer(){
+			GD.Print("Hi");
+		}
+
+		public void sortHandCards(){
+
+		for(int k=0; k<playerOneHand.Count; k++){
+
+				var card = playerOneHand[k];
+				card.SetGlobalPosition(hand1_pos[k]);
+			}
+
+		}
+
+    public Monster_01_2D crateCard(String cardId, String imagePath, int atk, int def,String name, String disciption ){
+        Monster_01_2D card= GetNode<Monster_01_2D>(cardId);
+        card._SetImage(imagePath);
+        card._SetAtk(atk);
+        card._SetDef(def);
+        card._SetName(name);
+        card._SetDescription(disciption);
+        return card;
+
+    }
+
   public override void _Process(float delta)
   {
 
 	
-     if(Input.IsActionJustPressed("draw")){
-		GD.Randomize();
-		Random random = new Random();
-		if(firstDraw){
-			for(int i = 0; i <=4; i++){
-			int index = random.Next(myCardList1.Count);
-			var move = myCardList1[index];
-			playerOneHand.Add(move);
-			move.SetVisible(true);
-			myCardList1.RemoveAt(index);
-			number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
+     if(Input.IsActionJustPressed("draw")){			
+			//erster zug
+			if(firstDrawPlayerOne || firstDrawPlayerTowe){				
+					if(playerOne && firstDrawPlayerOne){
+						for(int i = 0; i <=4; i++){
+							int index = random.Next(myCardList.Count);
+							var move = myCardList[index];
+							playerOneHand.Add(move);
+							move.SetVisible(true);
+							myCardList.RemoveAt(index);
+							number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+						
+						}
+						firstDrawPlayerOne = false;
+						sortHandCards();
+						playCardTime=true;
+
+					}
+					else if(playerTowe && firstDrawPlayerTowe){
+						//Umschreiben für Speiler zwei
+						/*for(int i = 0; i <=4; i++){
+							int index = random.Next(myCardList.Count);
+							var move = myCardList[index];
+							playerOneHand.Add(move);
+							move.SetVisible(true);
+							myCardList.RemoveAt(index);
+							number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+						
+						}*/
+						firstDrawPlayerTowe = false;
+						sortHandCards();
+						playCardTime=true;
+
+					}
+					else{
+						GD.Print("Falsche Taste");
+					}
+				}
+
+			//alleweiteren Züge
+			else if(!playCardTime){
+				if(playerOne && drawCard){
+					int index_n = random.Next(myCardList.Count);
+					var move = myCardList[index_n];
+					move.SetVisible(true);
+					
+					myCardList.RemoveAt(index_n);
+					playerOneHand.Add(move);
+					number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+
+					drawCard=!drawCard;
+					sortHandCards();
+					playCardTime=true;
+
+				}
+				else if (playerTowe && drawCard){
+
+					int index_n = random.Next(myCardList.Count);
+					var move = myCardList[index_n];
+					move.SetVisible(true);
+					
+					myCardList.RemoveAt(index_n);
+					playerOneHand.Add(move);
+					number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+
+					drawCard=!drawCard;
+					sortHandCards();
+					playCardTime=true;
 			
+				}
+				else{
+					GD.Print("Falsche Taste2");
+				}
 			}
-			firstDraw = false;
-		}
 		else{
-			int index_n = random.Next(myCardList1.Count);
-			var move = myCardList1[index_n];
-			move.SetVisible(true);
-			
-			myCardList1.RemoveAt(index_n);
-			playerOneHand.Add(move);
-			number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
+			GD.Print("kannst nicht ziehen");
 		}
+	}
+
+	//Haver card
+	max_pos = playerOneHand.Count;
+	if(!cardhighlighted && playCardTime){
+	if(Input.IsActionJustPressed("Active")){
+			pos = 0;
+			choose_card = playerOneHand[pos];
+			GD.Print(choose_card.GetScale());
+
+			choose_card.SetGlobalScale(_scalerBig);
+			choose_card.SetZIndex(1);
+			cardhighlighted = true;
+	}
+
+	}
+
+	else if(cardhighlighted && playCardTime ){
 		
-			for(int k=0; k<playerOneHand.Count; k++){
+		if(Input.IsActionJustPressed("go_right") ){
+		choose_card = playerOneHand[pos];
+			if(pos < max_pos -1){
+				
 
-				var card = playerOneHand[k];
-				card.SetGlobalPosition(hand1_pos[k]);
-  			}
+				choose_card.SetGlobalScale(_scaler);
+				choose_card.SetZIndex(0);
 
+				pos = pos +1;
+				choose_card = playerOneHand[pos];
+				choose_card.SetGlobalScale(_scalerBig);
+				choose_card.SetZIndex(1);
+
+			}
+			else{
+
+				choose_card.SetGlobalScale(_scaler);
+				choose_card.SetZIndex(0);
+
+				pos=0;
+				choose_card = playerOneHand[pos];
+				choose_card.SetGlobalScale(_scalerBig);
+				choose_card.SetZIndex(1);
+
+			}
+
+		}
+		if(Input.IsActionJustPressed("go_left")){
+			choose_card = playerOneHand[pos];
+			if(pos > min_pos){
+
+				choose_card.SetGlobalScale(_scaler);
+				choose_card.SetZIndex(0);
+
+				pos = pos -1;
+				choose_card = playerOneHand[pos];
+				choose_card.SetGlobalScale(_scalerBig);
+				choose_card.SetZIndex(1);
+
+			}else{
+
+				choose_card.SetGlobalScale(_scaler);
+				choose_card.SetZIndex(0);
+
+				pos= max_pos -1;
+				choose_card = playerOneHand[pos];
+				choose_card.SetGlobalScale(_scalerBig);
+				choose_card.SetZIndex(1);
+
+			}
+	}
+
+	//play a card
+		if(!fild1full && playCardTime){
+			
+			if(Input.IsActionJustPressed("Active")){
+				choose_card.SetZIndex(0);
+				choose_card.SetGlobalScale(_scaler);
+				choose_card.SetGlobalPosition(field1_pos[fill_number]);
+				card_fild1.Add(choose_card);
+				playerOneHand.Remove(choose_card);
+
+				sortHandCards();
+				playCardTime=!playCardTime;
+
+				if(fill_number <2){
+					fill_number ++;
+				}
+				else{
+					fild1full = !fild1full;
+				}
+
+				if(playerTowe && firsRound){
+					firsRound=false;
+					nextplayer();
+				}
+				
+
+			}
+
+		}
+
+	}
+  	 
   }
   
  	 
-  }
+  
 
   private void _on_EndTurnButton_pressed() {
 	foreach (var item in playerOneHand)
