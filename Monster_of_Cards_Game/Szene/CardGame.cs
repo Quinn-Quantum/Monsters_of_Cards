@@ -35,18 +35,23 @@ public class CardGame : Node2D
 	private Button _EndTurnButton;
 	private Button _StartTurnButton;
 
+
 	//Für Spieler eins
-	private List<Monster_01_2D> myCardList = new List<Monster_01_2D>();
-
+	private List<Monster_01_2D> myCardList1 = new List<Monster_01_2D>();
 	private List<Monster_01_2D> playerOneHand = new List<Monster_01_2D>();
-	private deck_number number_cards_in_deck;
-
+	private deck_number number_cards_in_deck1;
 	private bool firstDraw = true;
-	//Hand Positionen
+	//Hand Positionen Spieler 1
 	private List<Vector2> hand1_pos = new List<Vector2>();
 	
+
 	//für Spieler zwei
-	private Vector2 hand2;
+	private List<Monster_01_2D> myCardList2 = new List<Monster_01_2D>();
+	private List<Monster_01_2D> playerTwoHand = new List<Monster_01_2D>();
+	private deck_number number_cards_in_deck2;
+	//Hand Positionen Spieler 2
+	private List<Vector2> hand2_pos = new List<Vector2>();
+
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -62,6 +67,13 @@ public class CardGame : Node2D
 		//Spieler 2 Feld		y=230
 		//Spieler 1 Feld		y=360
 		//Spieler 1 Handkarten	y=490
+
+		hand2_pos.Add(new Vector2(200,100));
+		hand2_pos.Add(new Vector2(300,100));
+		hand2_pos.Add(new Vector2(400,100));
+		hand2_pos.Add(new Vector2(500,100));
+		hand2_pos.Add(new Vector2(600,100));
+		hand2_pos.Add(new Vector2(700,100));
 		
 		
 		_Monster01 = GetNode<Monster_01_2D>("Monster_01");
@@ -103,23 +115,40 @@ public class CardGame : Node2D
 		_Monster13 = GetNode<Monster_01_2D>("Monster_13");
 		_Monster13._SetImage("res://Assets/Monsters/Monster_13.png");
 
-		myCardList.Add(_Monster01);
-		myCardList.Add(_Monster02);
-		myCardList.Add(_Monster03);
-		myCardList.Add(_Monster04);
-		myCardList.Add(_Monster05);
-		myCardList.Add(_Monster06);
-		myCardList.Add(_Monster07);
-		myCardList.Add(_Monster08);
-		myCardList.Add(_Monster09);
-		myCardList.Add(_Monster10);
-		myCardList.Add(_Monster11);
-		myCardList.Add(_Monster12);
-		myCardList.Add(_Monster13);
+		myCardList1.Add(_Monster01);
+		myCardList1.Add(_Monster02);
+		myCardList1.Add(_Monster03);
+		myCardList1.Add(_Monster04);
+		myCardList1.Add(_Monster05);
+		myCardList1.Add(_Monster06);
+		myCardList1.Add(_Monster07);
+		myCardList1.Add(_Monster08);
+		myCardList1.Add(_Monster09);
+		myCardList1.Add(_Monster10);
+		myCardList1.Add(_Monster11);
+		myCardList1.Add(_Monster12);
+		myCardList1.Add(_Monster13);
+
+		myCardList2.Add(_Monster01);
+		myCardList2.Add(_Monster02);
+		myCardList2.Add(_Monster03);
+		myCardList2.Add(_Monster04);
+		myCardList2.Add(_Monster05);
+		myCardList2.Add(_Monster06);
+		myCardList2.Add(_Monster07);
+		myCardList2.Add(_Monster08);
+		myCardList2.Add(_Monster09);
+		myCardList2.Add(_Monster10);
+		myCardList2.Add(_Monster11);
+		myCardList2.Add(_Monster12);
+		myCardList2.Add(_Monster13);
 
 
-		number_cards_in_deck = GetNode<deck_number>("Card_back/deck_number");
-		number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+		number_cards_in_deck1 = GetNode<deck_number>("Card_back/deck_number1");
+		number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
+
+		number_cards_in_deck2 = GetNode<deck_number>("Card_back2/deck_number2");
+		number_cards_in_deck2.SetText(myCardList2.Count.ToString()+" Cards");
 		
 		_EndTurnButton = GetNode<Button>("EndTurnButton");
 		_StartTurnButton = GetNode<Button>("StartTurnButton");
@@ -136,24 +165,24 @@ public class CardGame : Node2D
 		Random random = new Random();
 		if(firstDraw){
 			for(int i = 0; i <=4; i++){
-			int index = random.Next(myCardList.Count);
-			var move = myCardList[index];
+			int index = random.Next(myCardList1.Count);
+			var move = myCardList1[index];
 			playerOneHand.Add(move);
 			move.SetVisible(true);
-			myCardList.RemoveAt(index);
-			number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+			myCardList1.RemoveAt(index);
+			number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
 			
 			}
 			firstDraw = false;
 		}
 		else{
-			int index_n = random.Next(myCardList.Count);
-			var move = myCardList[index_n];
+			int index_n = random.Next(myCardList1.Count);
+			var move = myCardList1[index_n];
 			move.SetVisible(true);
 			
-			myCardList.RemoveAt(index_n);
+			myCardList1.RemoveAt(index_n);
 			playerOneHand.Add(move);
-			number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+			number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
 		}
 		
 			for(int k=0; k<playerOneHand.Count; k++){

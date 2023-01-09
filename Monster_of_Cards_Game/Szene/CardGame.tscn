@@ -81,7 +81,23 @@ position = Vector2( 794, 358 )
 position = Vector2( 900, 500 )
 scale = Vector2( 0.774, 0.696 )
 
-[node name="deck_number" type="Label" parent="Card_back"]
+[node name="deck_number1" type="Label" parent="Card_back"]
+modulate = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
+self_modulate = Color( 0.0352941, 0.0352941, 0.0352941, 1 )
+margin_left = -56.8477
+margin_top = -68.9655
+margin_right = 90.1523
+margin_bottom = -45.9655
+rect_scale = Vector2( 0.774, 0.696 )
+text = "20 Cards"
+align = 1
+script = ExtResource( 4 )
+
+[node name="Card_back2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 124, 100 )
+scale = Vector2( 0.774, 0.696 )
+
+[node name="deck_number2" type="Label" parent="Card_back2"]
 modulate = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
 self_modulate = Color( 0.0352941, 0.0352941, 0.0352941, 1 )
 margin_left = -56.8477
