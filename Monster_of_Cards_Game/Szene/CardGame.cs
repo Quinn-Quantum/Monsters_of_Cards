@@ -45,7 +45,7 @@ public class CardGame : Node2D
 	//for player one
 	private bool playerOne = true; //if it is Player one turne
 	private bool firstDrawPlayerOne = true;
-	private List<Monster_01_2D> myCardList = new List<Monster_01_2D>();
+	private List<Monster_01_2D> myCardList1 = new List<Monster_01_2D>();
 
 	private List<Monster_01_2D> playerOneHand = new List<Monster_01_2D>();
 	private Monster_01_2D choose_card;
@@ -67,6 +67,8 @@ public class CardGame : Node2D
 	//for player two
 	private bool playerTowe = false; //if it is Player one turne
 	private bool firstDrawPlayerTowe = true;
+
+	private List<Monster_01_2D> myCardList2 = new List<Monster_01_2D>();
 	private Vector2 hand2;
 
 
@@ -89,7 +91,7 @@ public class CardGame : Node2D
 		field1_pos.Add(new Vector2(420,200));
 		
 		//Dec Player one
-
+		// Send
 		_Monster01 = crateCard("Monster_01","res://Assets/Monsters/Monster_01.png",3,3, "Test","Hallo Welt");
 		_Monster02 = crateCard("Monster_02","res://Assets/Monsters/Monster_02.png",3,3, "Name","Hallo Welt");
 		_Monster03 = crateCard("Monster_03","res://Assets/Monsters/Monster_03.png",3,3, "Name","Hallo Welt, was Geht so ab?");
@@ -104,23 +106,23 @@ public class CardGame : Node2D
 		_Monster12 = crateCard("Monster_12","res://Assets/Monsters/Monster_12.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
 		_Monster13 = crateCard("Monster_13","res://Assets/Monsters/Monster_13.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
 
-		myCardList.Add(_Monster01);
-		myCardList.Add(_Monster02);
-		myCardList.Add(_Monster03);
-		myCardList.Add(_Monster04);
-		myCardList.Add(_Monster05);
-		myCardList.Add(_Monster06);
-		myCardList.Add(_Monster07);
-		myCardList.Add(_Monster08);
-		myCardList.Add(_Monster09);
-		myCardList.Add(_Monster10);
-		myCardList.Add(_Monster11);
-		myCardList.Add(_Monster12);
-		myCardList.Add(_Monster13);
+		myCardList1.Add(_Monster01);
+		myCardList1.Add(_Monster02);
+		myCardList1.Add(_Monster03);
+		myCardList1.Add(_Monster04);
+		myCardList1.Add(_Monster05);
+		myCardList1.Add(_Monster06);
+		myCardList1.Add(_Monster07);
+		myCardList1.Add(_Monster08);
+		myCardList1.Add(_Monster09);
+		myCardList1.Add(_Monster10);
+		myCardList1.Add(_Monster11);
+		myCardList1.Add(_Monster12);
+		myCardList1.Add(_Monster13);
 
 		//
 		number_cards_in_deck = GetNode<deck_number>("deck_number");
-		number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+		number_cards_in_deck.SetText(myCardList1.Count.ToString()+" Cards");
 		GD.Randomize();
 		random = new Random();
 		
@@ -134,12 +136,12 @@ public class CardGame : Node2D
 			if(firstDrawPlayerOne || firstDrawPlayerTowe){				
 					if(playerOne && firstDrawPlayerOne){
 						for(int i = 0; i <=4; i++){
-							int index = random.Next(myCardList.Count);
-							var move = myCardList[index];
+							int index = random.Next(myCardList1.Count);
+							var move = myCardList1[index];
 							playerOneHand.Add(move);
 							move.SetVisible(true);
-							myCardList.RemoveAt(index);
-							number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+							myCardList1.RemoveAt(index);
+							number_cards_in_deck.SetText(myCardList1.Count.ToString()+" Cards");
 						
 						}
 						firstDrawPlayerOne = false;
@@ -150,12 +152,12 @@ public class CardGame : Node2D
 					else if(playerTowe && firstDrawPlayerTowe){
 						//Umschreiben für Speiler zwei
 						/*for(int i = 0; i <=4; i++){
-							int index = random.Next(myCardList.Count);
-							var move = myCardList[index];
+							int index = random.Next(myCardList2.Count);
+							var move = myCardList2[index];
 							playerOneHand.Add(move);
 							move.SetVisible(true);
 							myCardList.RemoveAt(index);
-							number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+							number_cards_in_deck.SetText(myCardList2.Count.ToString()+" Cards");
 						
 						}*/
 						firstDrawPlayerTowe = false;
@@ -169,15 +171,15 @@ public class CardGame : Node2D
 				}
 
 			//alleweiteren Züge
-			else if(!playCardTime){
+			else if(!playCardTime && !battelTime){
 				if(playerOne && drawCard){
-					int index_n = random.Next(myCardList.Count);
-					var move = myCardList[index_n];
+					int index_n = random.Next(myCardList1.Count);
+					var move = myCardList1[index_n];
 					move.SetVisible(true);
 					
-					myCardList.RemoveAt(index_n);
+					myCardList1.RemoveAt(index_n);
 					playerOneHand.Add(move);
-					number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+					number_cards_in_deck.SetText(myCardList1.Count.ToString()+" Cards");
 
 					drawCard=!drawCard;
 					sortHandCards();
@@ -186,13 +188,13 @@ public class CardGame : Node2D
 				}
 				else if (playerTowe && drawCard){
 
-					int index_n = random.Next(myCardList.Count);
-					var move = myCardList[index_n];
+					int index_n = random.Next(myCardList2.Count);
+					var move = myCardList2[index_n];
 					move.SetVisible(true);
 					
-					myCardList.RemoveAt(index_n);
+					myCardList2.RemoveAt(index_n);
 					playerOneHand.Add(move);
-					number_cards_in_deck.SetText(myCardList.Count.ToString()+" Cards");
+					number_cards_in_deck.SetText(myCardList2.Count.ToString()+" Cards");
 
 					drawCard=!drawCard;
 					sortHandCards();
@@ -212,83 +214,33 @@ public class CardGame : Node2D
 	max_pos = playerOneHand.Count;
 	if(!cardhighlighted && playCardTime){
 	if(Input.IsActionJustPressed("Active")){
-			pos = 0;
-			choose_card = playerOneHand[pos];
-			GD.Print(choose_card.GetScale());
-
-			choose_card.SetGlobalScale(_scalerBig);
-			choose_card.SetZIndex(1);
-			cardhighlighted = true;
+			cardhighlighted = highlight(playerOneHand);
 	}
 
 	}
-
 	else if(cardhighlighted && playCardTime ){
 		
 		if(Input.IsActionJustPressed("go_right") ){
-		choose_card = playerOneHand[pos];
-			if(pos < max_pos -1){
-				
-
-				choose_card.SetGlobalScale(_scaler);
-				choose_card.SetZIndex(0);
-
-				pos = pos +1;
-				choose_card = playerOneHand[pos];
-				choose_card.SetGlobalScale(_scalerBig);
-				choose_card.SetZIndex(1);
-
-			}
-			else{
-
-				choose_card.SetGlobalScale(_scaler);
-				choose_card.SetZIndex(0);
-
-				pos=0;
-				choose_card = playerOneHand[pos];
-				choose_card.SetGlobalScale(_scalerBig);
-				choose_card.SetZIndex(1);
-
-			}
+			moveHighlight(playerOneHand.Count, playerOneHand, "go_right");
 
 		}
 		if(Input.IsActionJustPressed("go_left")){
-			choose_card = playerOneHand[pos];
-			if(pos > min_pos){
-
-				choose_card.SetGlobalScale(_scaler);
-				choose_card.SetZIndex(0);
-
-				pos = pos -1;
-				choose_card = playerOneHand[pos];
-				choose_card.SetGlobalScale(_scalerBig);
-				choose_card.SetZIndex(1);
-
-			}else{
-
-				choose_card.SetGlobalScale(_scaler);
-				choose_card.SetZIndex(0);
-
-				pos= max_pos -1;
-				choose_card = playerOneHand[pos];
-				choose_card.SetGlobalScale(_scalerBig);
-				choose_card.SetZIndex(1);
-
-			}
+			moveHighlight(playerOneHand.Count, playerOneHand, "go_left");
 	}
 
 	//play a card
-		if(!fild1full && playCardTime){
+	if(!fild1full && playCardTime){
 			
-			if(Input.IsActionJustPressed("Active")){
+		if(Input.IsActionJustPressed("Active")){
 				choose_card.SetZIndex(0);
 				choose_card.SetGlobalScale(_scaler);
 				choose_card.SetGlobalPosition(field1_pos[fill_number]);
 				card_fild1.Add(choose_card);
 				playerOneHand.Remove(choose_card);
-
 				sortHandCards();
+				cardhighlighted=false;
 				playCardTime=!playCardTime;
+				battelTime=true;
 
 				if(fill_number <2){
 					fill_number ++;
@@ -297,22 +249,45 @@ public class CardGame : Node2D
 					fild1full = !fild1full;
 				}
 
-				if(playerTowe && firsRound){
-					firsRound=false;
-					nextplayer();
-				}
-				
-
 			}
+
+	}
+	
+  	 
+  } // IF Zugfase
+
+  if(!cardhighlighted && battelTime){
+
+			cardhighlighted = highlight(card_fild1);
+			
+			GD.Print(cardhighlighted);
+			GD.Print(battelTime);
+
+		}
+
+	else if(cardhighlighted && battelTime){
+		
+		if(Input.IsActionJustPressed("go_right") ){
+			moveHighlight(card_fild1.Count,card_fild1,"go_right");
+		
+		}
+		else if(Input.IsActionJustPressed("go_left")){
+			moveHighlight(card_fild1.Count,card_fild1,"go_left");
+			
+		}
+		else if(Input.IsActionJustPressed("Active")){
+				choose_card.SetZIndex(0);
+				choose_card.SetGlobalScale(_scaler);
 
 		}
 
 	}
-  	 
-  }
+}
 
 	public void nextplayer(){
+		
 		GD.Print("Hi");
+
 	}
 
 	public void sortHandCards(){
@@ -336,7 +311,68 @@ public class CardGame : Node2D
 
 	}
 
+	public bool highlight(List<Monster_01_2D> card_List){
+		pos = 0;
+			choose_card = card_List[pos];
+			choose_card.SetGlobalScale(_scalerBig);
+			choose_card.SetZIndex(1);
+		return true;
+	}
 
+	public void moveHighlight(int max_pos, List<Monster_01_2D> card_List, String input){
+
+		if(input.Equals( "go_right") ){
+		choose_card = playerOneHand[pos];
+			if(pos < max_pos -1){
+
+				choose_card.SetGlobalScale(_scaler);
+				choose_card.SetZIndex(0);
+
+				pos = pos +1;
+				choose_card = card_List[pos];
+				choose_card.SetGlobalScale(_scalerBig);
+				choose_card.SetZIndex(1);
+
+			}
+			else{
+
+				choose_card.SetGlobalScale(_scaler);
+				choose_card.SetZIndex(0);
+
+				pos=0;
+				choose_card = playerOneHand[pos];
+				choose_card.SetGlobalScale(_scalerBig);
+				choose_card.SetZIndex(1);
+
+			}
+
+		}
+		if(input.Equals("go_left")){
+			choose_card = card_List[pos];
+			if(pos > min_pos){
+
+				choose_card.SetGlobalScale(_scaler);
+				choose_card.SetZIndex(0);
+
+				pos = pos -1;
+				choose_card = playerOneHand[pos];
+				choose_card.SetGlobalScale(_scalerBig);
+				choose_card.SetZIndex(1);
+
+			}else{
+
+				choose_card.SetGlobalScale(_scaler);
+				choose_card.SetZIndex(0);
+
+				pos= max_pos -1;
+				choose_card = card_List[pos];
+				choose_card.SetGlobalScale(_scalerBig);
+				choose_card.SetZIndex(1);
+
+			}
+	}
+
+	}
 		
 }
   
