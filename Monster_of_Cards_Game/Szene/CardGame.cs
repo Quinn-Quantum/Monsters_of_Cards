@@ -8,6 +8,7 @@ using System.Linq;
 
 
 
+
 public class CardGame : Node2D
 {
 
@@ -47,6 +48,10 @@ public class CardGame : Node2D
 	private Vector2 _scaler= new Vector2(0.2f,0.2f);
 	private Vector2 _scalerBig = new Vector2(0.4f,0.4f);
 	private Random random;
+
+//Spieler
+	private Player PlayerOne = new Player();
+	private Player PlayerTwo = new Player();
 //Bool for Ablauf
 	private bool firsRound = true;
 	private bool drawCard = false;
@@ -61,21 +66,16 @@ public class CardGame : Node2D
 	private bool playerOne = true; //if it is Player one turne
 	private bool firstDrawPlayerOne = true;
 	private List<Monster_01_2D> myCardList1 = new List<Monster_01_2D>();
-	private List<Monster_01_2D> playerOneHand = new List<Monster_01_2D>();
-	private Monster_01_2D choose_card;
 	private deck_number number_cards_in_deck1;
 
-	//Hand Positionen
-	private List<Vector2> hand1_pos = new List<Vector2>();
-	private int pos;
-	private int max_pos;
-	private int min_pos = 0;
-
+	
 	//Feld Player one
-	private List<Vector2> field1_pos = new List<Vector2>();
 	int fill_number=0;
 	private bool field1full=false;
-	private  List<Monster_01_2D> card_field1 = new List<Monster_01_2D>();
+	private List<Vector2> field1_pos = new List<Vector2>();
+	private List<Monster_01_2D> card_field1 = new List<Monster_01_2D>();
+
+	
 
 
 
@@ -83,22 +83,15 @@ public class CardGame : Node2D
 	private bool playerTwo = false; //if it is Player one turne
 	private bool firstDrawPlayerTwo = true;
 	private List<Monster_01_2D> myCardList2 = new List<Monster_01_2D>();
-	private List<Monster_01_2D> playerTwoHand = new List<Monster_01_2D>();
 	private deck_number number_cards_in_deck2;
-
-	//Hand Positionen
-	private List<Vector2> hand2_pos = new List<Vector2>();
-	private int pos2;
-	private int max_pos2;
-	private int min_pos2 = 0;
+	
 
 	//Field Player Two
-	private List<Vector2> field2_pos = new List<Vector2>();
+
 	int fill_number2=0;
 	private bool field2full=false;
-	private  List<Monster_01_2D> card_field2 = new List<Monster_01_2D>();
-
-
+	private List<Vector2> field2_pos = new List<Vector2>();
+	private List<Monster_01_2D> card_field2 = new List<Monster_01_2D>();
 
 	private Button _EndTurnButton;
 	private Button _StartTurnButton;
@@ -108,25 +101,14 @@ public class CardGame : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		// hand1_pos.Add(new Vector2(200,490));
-		// hand1_pos.Add(new Vector2(300,490));
-		// hand1_pos.Add(new Vector2(400,490));
-		// hand1_pos.Add(new Vector2(500,490));
-		// hand1_pos.Add(new Vector2(600,490));
-		// hand1_pos.Add(new Vector2(700,490));
-		//Zeilen für Karten
-		//Spieler 2 Handkarten	y=100
-		//Spieler 2 Feld		y=230
-		//Spieler 1 Feld		y=360
-		//Spieler 1 Handkarten	y=490
-
+		
 		//ToDo
-		hand2_pos.Add(new Vector2(200,100));
-		hand2_pos.Add(new Vector2(300,100));
-		hand2_pos.Add(new Vector2(400,100));
-		hand2_pos.Add(new Vector2(500,100));
-		hand2_pos.Add(new Vector2(600,100));
-		hand2_pos.Add(new Vector2(700,100));
+		PlayerTwo.setHand_pos(new Vector2(200,100));
+		PlayerTwo.setHand_pos(new Vector2(300,100));
+		PlayerTwo.setHand_pos(new Vector2(400,100));
+		PlayerTwo.setHand_pos(new Vector2(500,100));
+		PlayerTwo.setHand_pos(new Vector2(600,100));
+		PlayerTwo.setHand_pos(new Vector2(700,100));
 
 		field2_pos.Add(new Vector2(100,230));
 		field2_pos.Add(new Vector2(260,230));
@@ -134,12 +116,12 @@ public class CardGame : Node2D
 		
 		
 		//Hand Positionen Player one
-		hand1_pos.Add(new Vector2(200,490));
-		hand1_pos.Add(new Vector2(300,490));
-		hand1_pos.Add(new Vector2(400,490));
-		hand1_pos.Add(new Vector2(500,490));
-		hand1_pos.Add(new Vector2(600,490));
-		hand1_pos.Add(new Vector2(700,490));
+		PlayerOne.setHand_pos(new Vector2(200,490));
+		PlayerOne.setHand_pos(new Vector2(300,490));
+		PlayerOne.setHand_pos(new Vector2(400,490));
+		PlayerOne.setHand_pos(new Vector2(500,490));
+		PlayerOne.setHand_pos(new Vector2(600,490));
+		PlayerOne.setHand_pos(new Vector2(700,490));
 		//Feld Positionen Player one
 		field1_pos.Add(new Vector2(100,360));
 		field1_pos.Add(new Vector2(260,360));
@@ -231,15 +213,14 @@ public class CardGame : Node2D
 					if(playerOne && firstDrawPlayerOne){
 						for(int i = 0; i <=4; i++){
 							int index = random.Next(myCardList1.Count);
-							var move = myCardList1[index];
-							playerOneHand.Add(move);
-							move.SetVisible(true);
+							var card_to_move = myCardList1[index];
+							PlayerOne.setPlyerHandCard(card_to_move);
 							myCardList1.RemoveAt(index);
 							number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
 						
 						}
 						firstDrawPlayerOne = false;
-						sortHandCards();
+						PlayerOne.sortHandCards();
 						playCardTime=true;
 
 					}
@@ -247,15 +228,14 @@ public class CardGame : Node2D
 						//Umschreiben für Speiler zwei
 						for(int i = 0; i <=4; i++){
 							int index = random.Next(myCardList2.Count);
-							var move = myCardList2[index];
-							playerTwoHand.Add(move);
-							move.SetVisible(true);
+							var card_to_move = myCardList2[index];
+							PlayerTwo.setPlyerHandCard(card_to_move);
 							myCardList2.RemoveAt(index);
 							number_cards_in_deck2.SetText(myCardList2.Count.ToString()+" Cards");
 						
 						}
 						firstDrawPlayerTwo = false;
-						sortHandCards();
+						PlayerTwo.sortHandCards();
 						playCardTime=true;
 
 					}
@@ -268,30 +248,26 @@ public class CardGame : Node2D
 			else if(!playCardTime && !battelTime){
 				if(playerOne && drawCard){
 					int index_n = random.Next(myCardList1.Count);
-					var move = myCardList1[index_n];
-					move.SetVisible(true);
-					
+					var card_to_move = myCardList1[index_n];
+					PlayerOne.setPlyerHandCard(card_to_move);
 					myCardList1.RemoveAt(index_n);
-					playerOneHand.Add(move);
 					number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
 
 					drawCard=!drawCard;
-					sortHandCards();
+					PlayerOne.sortHandCards();
 					playCardTime=true;
 
 				}
 				else if (playerTwo && drawCard){
 
 					int index_n = random.Next(myCardList2.Count);
-					var move = myCardList2[index_n];
-					move.SetVisible(true);
-					
+					var card_to_move = myCardList2[index_n];					
 					myCardList2.RemoveAt(index_n);
-					playerTwoHand.Add(move);
+					PlayerTwo.setPlyerHandCard(card_to_move);
 					number_cards_in_deck2.SetText(myCardList2.Count.ToString()+" Cards");
 
 					drawCard=!drawCard;
-					sortHandCards();
+					PlayerTwo.sortHandCards();
 					playCardTime=true;
 			
 				}
@@ -307,60 +283,62 @@ public class CardGame : Node2D
 	//Haver card
 	if(playerOne)
 	{
-		max_pos = playerOneHand.Count;
 		if(!cardhighlighted && playCardTime){
+			
 		if(Input.IsActionJustPressed("Active")){
-				cardhighlighted = highlight(playerOneHand);
+			GD.Print("Tee");
+				cardhighlighted = PlayerOne.highlightaCard();
+				
 		}
 
 		}
 		else if(cardhighlighted && playCardTime ){
 			
 			if(Input.IsActionJustPressed("go_right") ){
-				moveHighlight(playerOneHand.Count, playerOneHand, "go_right");
+				PlayerOne.moveHighlightHandCards("go_right");
 
 			}
 			if(Input.IsActionJustPressed("go_left")){
-				moveHighlight(playerOneHand.Count, playerOneHand, "go_left");
+				PlayerOne.moveHighlightHandCards("go_left");
 			}
 		}
 	}
 	if(playerTwo)
 	{
 		
-		max_pos2 = playerTwoHand.Count;
 		if(!cardhighlighted && playCardTime){
 		if(Input.IsActionJustPressed("Active")){
-			GD.Print("Test nach");
-				cardhighlighted = highlight(playerTwoHand);
-				GD.Print(cardhighlighted);
+				cardhighlighted = PlayerTwo.highlightaCard();
 		}
 
 		}
 		else if(cardhighlighted && playCardTime ){
 			
 			if(Input.IsActionJustPressed("go_right") ){
-				moveHighlight(playerTwoHand.Count, playerTwoHand, "go_right");
+				PlayerTwo.moveHighlightHandCards("go_right");
 
 			}
 			if(Input.IsActionJustPressed("go_left")){
-				moveHighlight(playerTwoHand.Count, playerTwoHand, "go_left");
+				PlayerTwo.moveHighlightHandCards("go_left");
 			}
 		}
 	}
 
-	//play a card
-	if(playerOne)
+ 	//play a card
+	if(playerOne && !field1full && playCardTime && cardhighlighted)
 	{
-		if(!field1full && playCardTime){
 				
+			GD.Print("Kaffee");
 			if(Input.IsActionJustPressed("Active")){
+					var choose_card = PlayerOne.getChoose_card();
 					choose_card.SetZIndex(0);
+					
 					choose_card.SetGlobalScale(_scaler);
 					choose_card.SetGlobalPosition(field1_pos[fill_number]);
 					card_field1.Add(choose_card);
-					playerOneHand.Remove(choose_card);
-					sortHandCards();
+					PlayerOne.removeaCard(choose_card);
+					
+
 					cardhighlighted=false;
 					playCardTime=!playCardTime;
 					battelTime=true;
@@ -380,64 +358,63 @@ public class CardGame : Node2D
 
 				}
 
-		}
 	}
-	if(playerTwo)
-	{
-		if(!field2full && playCardTime){
+// 	if(playerTwo)
+// 	{
+// 		if(!field2full && playCardTime){
 				
-			if(Input.IsActionJustPressed("Active")){
-					choose_card.SetZIndex(0);
-					choose_card.SetGlobalScale(_scaler);
-					choose_card.SetGlobalPosition(field2_pos[fill_number2]);
-					card_field2.Add(choose_card);
-					playerTwoHand.Remove(choose_card);
-					sortHandCards();
-					cardhighlighted=false;
-					playCardTime=!playCardTime;
-					battelTime=true;
+// 			if(Input.IsActionJustPressed("Active")){
+// 					choose_card.SetZIndex(0);
+// 					choose_card.SetGlobalScale(_scaler);
+// 					choose_card.SetGlobalPosition(field2_pos[fill_number2]);
+// 					card_field2.Add(choose_card);
+// 					playerTwoHand.Remove(choose_card);
+// 					sortHandCards();
+// 					cardhighlighted=false;
+// 					playCardTime=!playCardTime;
+// 					battelTime=true;
 
-					if(fill_number2 <2){
-						fill_number2 ++;
-					}
-					else{
-						field2full = !field2full;
-					}
+// 					if(fill_number2 <2){
+// 						fill_number2 ++;
+// 					}
+// 					else{
+// 						field2full = !field2full;
+// 					}
 
-				}
+// 				}
 
-		}
-	}
+// 		}
+// 	}
 	
   	 
- // IF Zugfase
+//  // IF Zugfase
 
-  if(!cardhighlighted && battelTime){
+//   if(!cardhighlighted && battelTime){
 
-			cardhighlighted = highlight(card_field1);
+// 			cardhighlighted = highlight(card_field1);
 			
-			GD.Print(cardhighlighted);
-			GD.Print(battelTime);
+// 			GD.Print(cardhighlighted);
+// 			GD.Print(battelTime);
 
-		}
+// 		}
 
-	else if(cardhighlighted && battelTime){
+// 	else if(cardhighlighted && battelTime){
 		
-		if(Input.IsActionJustPressed("go_right") ){
-			moveHighlight(card_field1.Count,card_field1,"go_right");
+// 		if(Input.IsActionJustPressed("go_right") ){
+// 			moveHighlight(card_field1.Count,card_field1,"go_right");
 		
-		}
-		else if(Input.IsActionJustPressed("go_left")){
-			moveHighlight(card_field1.Count,card_field1,"go_left");
+// 		}
+// 		else if(Input.IsActionJustPressed("go_left")){
+// 			moveHighlight(card_field1.Count,card_field1,"go_left");
 			
-		}
-		else if(Input.IsActionJustPressed("Active")){
-				choose_card.SetZIndex(0);
-				choose_card.SetGlobalScale(_scaler);
+// 		}
+// 		else if(Input.IsActionJustPressed("Active")){
+// 				choose_card.SetZIndex(0);
+// 				choose_card.SetGlobalScale(_scaler);
 
-		}
+// 		}
 
-	}
+// 	}
 }
 
 	public void nextplayer(){
@@ -446,22 +423,22 @@ public class CardGame : Node2D
 
 	}
 
-	public void sortHandCards(){
-		if(playerOne)
-		{
-			for(int k=0; k<playerOneHand.Count; k++){
-				var card = playerOneHand[k];
-				card.SetGlobalPosition(hand1_pos[k]);
-			}
-		}
-		else if(playerTwo)
-		{
-			for(int k=0; k<playerTwoHand.Count; k++){
-				var card = playerTwoHand[k];
-				card.SetGlobalPosition(hand2_pos[k]);
-			}
-		}
-	}
+	// public void sortHandCards(){
+	// 	if(playerOne)
+	// 	{
+	// 		for(int k=0; k<playerOneHand.Count; k++){
+	// 			var card = playerOneHand[k];
+	// 			card.SetGlobalPosition(hand1_pos[k]);
+	// 		}
+	// 	}
+	// 	else if(playerTwo)
+	// 	{
+	// 		for(int k=0; k<playerTwoHand.Count; k++){
+	// 			var card = playerTwoHand[k];
+	// 			card.SetGlobalPosition(hand2_pos[k]);
+	// 		}
+	// 	}
+	// }
 
 	public Monster_01_2D crateCard(String cardId, String imagePath, int atk, int def,String name, String disciption ){
 		Monster_01_2D card= GetNode<Monster_01_2D>(cardId);
@@ -474,101 +451,100 @@ public class CardGame : Node2D
 
 	}
 
-	public bool highlight(List<Monster_01_2D> card_List){
-		pos = 0;
-			choose_card = card_List[pos];
-			choose_card.SetGlobalScale(_scalerBig);
-			choose_card.SetZIndex(1);
-		return true;
-	}
+	// public bool highlight(List<Monster_01_2D> card_List){
+	// 	pos = 0;
+	// 		choose_card = card_List[pos];
+	// 		choose_card.SetGlobalScale(_scalerBig);
+	// 		choose_card.SetZIndex(1);
+	// 	return true;
+	// }
 
-	public void moveHighlight(int max_pos, List<Monster_01_2D> card_List, String input){
+	// public void moveHighlight(int max_pos, List<Monster_01_2D> card_List, String input){
+	// 	if(input.Equals( "go_right") ){
+	// 	choose_card = playerOneHand[pos];
+	// 		if(pos < max_pos -1){
 
-		if(input.Equals( "go_right") ){
-		choose_card = playerOneHand[pos];
-			if(pos < max_pos -1){
+	// 			choose_card.SetGlobalScale(_scaler);
+	// 			choose_card.SetZIndex(0);
 
-				choose_card.SetGlobalScale(_scaler);
-				choose_card.SetZIndex(0);
+	// 			pos = pos +1;
+	// 			choose_card = card_List[pos];
+	// 			choose_card.SetGlobalScale(_scalerBig);
+	// 			choose_card.SetZIndex(1);
 
-				pos = pos +1;
-				choose_card = card_List[pos];
-				choose_card.SetGlobalScale(_scalerBig);
-				choose_card.SetZIndex(1);
+	// 		}
+	// 		else{
 
-			}
-			else{
+	// 			choose_card.SetGlobalScale(_scaler);
+	// 			choose_card.SetZIndex(0);
 
-				choose_card.SetGlobalScale(_scaler);
-				choose_card.SetZIndex(0);
+	// 			pos=0;
+	// 			choose_card = playerOneHand[pos];
+	// 			choose_card.SetGlobalScale(_scalerBig);
+	// 			choose_card.SetZIndex(1);
 
-				pos=0;
-				choose_card = playerOneHand[pos];
-				choose_card.SetGlobalScale(_scalerBig);
-				choose_card.SetZIndex(1);
+	// 		}
 
-			}
+	// 	}
+	// 	if(input.Equals("go_left")){
+	// 		choose_card = card_List[pos];
+	// 		if(pos > min_pos){
 
-		}
-		if(input.Equals("go_left")){
-			choose_card = card_List[pos];
-			if(pos > min_pos){
+	// 			choose_card.SetGlobalScale(_scaler);
+	// 			choose_card.SetZIndex(0);
 
-				choose_card.SetGlobalScale(_scaler);
-				choose_card.SetZIndex(0);
+	// 			pos = pos -1;
+	// 			choose_card = playerOneHand[pos];
+	// 			choose_card.SetGlobalScale(_scalerBig);
+	// 			choose_card.SetZIndex(1);
 
-				pos = pos -1;
-				choose_card = playerOneHand[pos];
-				choose_card.SetGlobalScale(_scalerBig);
-				choose_card.SetZIndex(1);
+	// 		}else{
 
-			}else{
+	// 			choose_card.SetGlobalScale(_scaler);
+	// 			choose_card.SetZIndex(0);
 
-				choose_card.SetGlobalScale(_scaler);
-				choose_card.SetZIndex(0);
+	// 			pos= max_pos -1;
+	// 			choose_card = card_List[pos];
+	// 			choose_card.SetGlobalScale(_scalerBig);
+	// 			choose_card.SetZIndex(1);
 
-				pos= max_pos -1;
-				choose_card = card_List[pos];
-				choose_card.SetGlobalScale(_scalerBig);
-				choose_card.SetZIndex(1);
+	// 		}
+	// }
 
-			}
-	}
-
-	}
+	// }
 		
 
   
 
-	private void _on_EndTurnButton_pressed() {
+	// private void _on_EndTurnButton_pressed() {
 		
-		foreach (var item in playerOneHand)
-		{
-			item.SetVisible(false);
-		}
-		if(playerOne){
-			playerOne = false;
-			firstDrawPlayerOne = false;
-			playerTwo = true;
-			battelTime=false;
-		}
-		else if(playerTwo){
-			playerTwo = true;
-			firstDrawPlayerTwo = false;
-			playerTwo = false;
-			battelTime=false;
-		}
-		_StartTurnButton.SetVisible(true);
-		_EndTurnButton.SetVisible(false);
-	}
+	// 	foreach (var item in playerOneHand)
+	// 	{
+	// 		item.SetVisible(false);
+	// 	}
+	// 	if(playerOne){
+	// 		playerOne = false;
+	// 		firstDrawPlayerOne = false;
+	// 		playerTwo = true;
+	// 		battelTime=false;
+	// 	}
+	// 	else if(playerTwo){
+	// 		playerTwo = true;
+	// 		firstDrawPlayerTwo = false;
+	// 		playerTwo = false;
+	// 		battelTime=false;
+	// 	}
+	// 	_StartTurnButton.SetVisible(true);
+	// 	_EndTurnButton.SetVisible(false);
+	// }
 
-	private void _on_StartTurnButton_pressed() {
-		foreach (var item in playerTwoHand)
-		{
-			item.SetVisible(true);
-		}
-		_StartTurnButton.SetVisible(false);
-		_EndTurnButton.SetVisible(true);
-	}
+	// private void _on_StartTurnButton_pressed() {
+	// 	foreach (var item in playerTwoHand)
+	// 	{
+	// 		item.SetVisible(true);
+	// 	}
+	// 	_StartTurnButton.SetVisible(false);
+	// 	_EndTurnButton.SetVisible(true);
+	// }
 
 }
