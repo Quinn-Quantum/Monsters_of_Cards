@@ -4,6 +4,9 @@ using System;
 
 public class CardGame : Node2D
 {
+	//Label User Help InGame
+	private Label_LifePoints phase;
+	private Label_Discription taste;
 	//All Cards
 	public PackedScene simultaneousScene ;
 
@@ -43,7 +46,7 @@ public class CardGame : Node2D
 
 	//for player two
 
-		private Label_LifePoints lifePoints_PlayerTwo;
+	private Label_LifePoints lifePoints_PlayerTwo;
 	private bool playerTwo = false; //if it is Player one turne
 	private bool firstDrawPlayerTwo = true;
 	private List<Monster_01_2D> myCardList2 = new List<Monster_01_2D>();
@@ -61,6 +64,12 @@ public class CardGame : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+
+		phase = GetNode<Label_LifePoints>("Phase");
+		phase.SetText("Zugphase");
+
+		taste = GetNode<Label_Discription>("Taste");
+		taste.SetText("Taste: D");
 		
 		//ToDo
 		PlayerTwo.setHand_pos(new Vector2(200,100));
@@ -167,6 +176,8 @@ public class CardGame : Node2D
   public override void _Process(float delta)
   {	
 	 if(Input.IsActionJustPressed("draw")){	
+		phase.SetText("Kartenwahl");
+		taste.SetText("Taste: A");
 		cardhighlighted=false;		
 			//erster zug
 			if(firstDrawPlayerOne || firstDrawPlayerTwo){				
@@ -202,6 +213,7 @@ public class CardGame : Node2D
 						GD.Print("Falsche Taste");
 					}
 				}
+			
 			}
 
 			//alleweiteren Züge
@@ -246,9 +258,12 @@ public class CardGame : Node2D
 		if(!cardhighlighted && playCardTime){
 			
 		if(Input.IsActionJustPressed("Active")){
+			phase.SetText("Kartenwahl");
+			taste.SetText("Taste: <- und ->, Spiel: X");
 			
 			cardhighlighted = PlayerOne.highlightaCard();				
 		}
+		
 
 		}
 		else if(cardhighlighted && playCardTime ){
@@ -289,6 +304,8 @@ public class CardGame : Node2D
 	{
 							
 			if(playerOne && !PlayerOne.fieldfull && Input.IsActionJustPressed("PlayACard")){
+				phase.SetText("Angriff");
+				taste.SetText("Taste: A");
 					var choose_card = PlayerOne.getChoose_card();
 					choose_card.SetZIndex(0);
 					
