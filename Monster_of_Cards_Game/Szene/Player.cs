@@ -10,7 +10,7 @@ using System.Linq;
 
 public class Player 
 {
-
+   public bool fieldfull=false;
    private List<Monster_01_2D> playerHand = new List<Monster_01_2D>(); 
 //ausgewählte Handkarte
    private Monster_01_2D choose_card;

@@ -1,25 +1,14 @@
 using Godot;
-using Godot.Collections;
 using System.Collections.Generic;
 using System;
-using System.IO;
-using System.Linq;
-
-
-
-
 
 public class CardGame : Node2D
 {
-
 	//All Cards
-
 	public PackedScene simultaneousScene ;
 
 	private Monster_01_2D  _Monster01, _Monster02,  _Monster03, _Monster04,  _Monster05, _Monster06,  _Monster07;
-	private Monster_01_2D  _Monster08,  _Monster09, _Monster10,  _Monster11,  _Monster12,  _Monster13;
-
-	
+	private Monster_01_2D  _Monster08,  _Monster09, _Monster10,  _Monster11,  _Monster12,  _Monster13;	
 	private Monster_01_2D  _Monster14,  _Monster15,  _Monster16,  _Monster17,  _Monster18,  _Monster19,  _Monster20;
 	private Monster_01_2D  _Monster21,  _Monster22, _Monster23,  _Monster24,  _Monster25, _Monster26;
 
@@ -38,24 +27,17 @@ public class CardGame : Node2D
 
 	private bool battelTime = false;
 
-
-
 	//for player one
 	private bool playerOne = true; //if it is Player one turne
 	private bool firstDrawPlayerOne = true;
 	private List<Monster_01_2D> myCardList1 = new List<Monster_01_2D>();
 	private deck_number number_cards_in_deck1;
-
 	
 	//Feld Player one
 	int fill_number=0;
-	private bool field1full=false;
+	
 	private List<Vector2> field1_pos = new List<Vector2>();
 	private List<Monster_01_2D> card_field1 = new List<Monster_01_2D>();
-
-	
-
-
 
 	//for player two
 	private bool playerTwo = false; //if it is Player one turne
@@ -63,18 +45,14 @@ public class CardGame : Node2D
 	private List<Monster_01_2D> myCardList2 = new List<Monster_01_2D>();
 	private deck_number number_cards_in_deck2;
 	
-
 	//Field Player Two
-
 	int fill_number2=0;
-	private bool field2full=false;
+	
 	private List<Vector2> field2_pos = new List<Vector2>();
 	private List<Monster_01_2D> card_field2 = new List<Monster_01_2D>();
 
 	private Button _EndTurnButton;
 	private Button _StartTurnButton;
-
-
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -163,7 +141,6 @@ public class CardGame : Node2D
 		myCardList2.Add(_Monster25);
 		myCardList2.Add(_Monster26);
 
-
 		number_cards_in_deck1 = GetNode<deck_number>("Card_back/deck_number1");
 		number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
 
@@ -174,16 +151,11 @@ public class CardGame : Node2D
 		_StartTurnButton = GetNode<Button>("StartTurnButton");
 
 		GD.Randomize();
-		random = new Random();
-			
-			//test.Translation= Vector2(10*i, 10*i);
+		random = new Random();					
 		}
-		// Called every frame. 'delta' is the elapsed time since the previous frame.
 
   public override void _Process(float delta)
-  {
-
-	
+  {	
 	 if(Input.IsActionJustPressed("draw")){	
 		cardhighlighted=false;		
 			//erster zug
@@ -215,7 +187,6 @@ public class CardGame : Node2D
 						firstDrawPlayerTwo = false;
 						PlayerTwo.sortHandCards();
 						playCardTime=true;
-
 					}
 					else{
 						GD.Print("Falsche Taste");
@@ -265,8 +236,7 @@ public class CardGame : Node2D
 			
 		if(Input.IsActionJustPressed("Active")){
 			
-			cardhighlighted = PlayerOne.highlightaCard();
-				
+			cardhighlighted = PlayerOne.highlightaCard();				
 		}
 
 		}
@@ -281,9 +251,9 @@ public class CardGame : Node2D
 			}
 		}
 	}
+
 	if(playerTwo)
-	{
-		
+	{		
 		if(!cardhighlighted && playCardTime){
 		if(Input.IsActionJustPressed("Active")){
 				cardhighlighted = PlayerTwo.highlightaCard();
@@ -303,11 +273,10 @@ public class CardGame : Node2D
 	}
 
  	//play a card
-	if(playerOne && !field1full && playCardTime && cardhighlighted)
+	if( playCardTime && cardhighlighted)
 	{
-				
-			
-			if(Input.IsActionJustPressed("PlayACard")){
+							
+			if(playerOne && !PlayerOne.fieldfull && Input.IsActionJustPressed("PlayACard")){
 					var choose_card = PlayerOne.getChoose_card();
 					choose_card.SetZIndex(0);
 					
@@ -316,7 +285,6 @@ public class CardGame : Node2D
 					card_field1.Add(choose_card);
 					PlayerOne.removeaCard(choose_card);
 					
-
 					cardhighlighted=false;
 					playCardTime=!playCardTime;
 					battelTime=true;
@@ -325,44 +293,36 @@ public class CardGame : Node2D
 						fill_number ++;
 					}
 					else{
-						field1full = !field1full;
+						PlayerOne.fieldfull = !PlayerOne.fieldfull;
 					}
 
 					if(playerTwo && firsRound){
 						firsRound=false;
 						nextplayer();
-					}
-					
-
+					}					
 				}
 
+				if(playerTwo && !PlayerTwo.fieldfull && Input.IsActionJustPressed("PlayACard")){
+					var choose_card = PlayerTwo.getChoose_card();
+					choose_card.SetZIndex(0);
+					
+					choose_card.SetGlobalScale(_scaler);
+					choose_card.SetGlobalPosition(field2_pos[fill_number]);
+					card_field2.Add(choose_card);
+					PlayerTwo.removeaCard(choose_card);
+					
+					cardhighlighted=false;
+					playCardTime=!playCardTime;
+					battelTime=true;
+
+					if(fill_number <2){
+						fill_number ++;
+					}
+					else{
+						PlayerTwo.fieldfull = !PlayerTwo.fieldfull;
+					}
+				}
 	}
-// 	if(playerTwo)
-// 	{
-// 		if(!field2full && playCardTime){
-				
-// 			if(Input.IsActionJustPressed("Active")){
-// 					choose_card.SetZIndex(0);
-// 					choose_card.SetGlobalScale(_scaler);
-// 					choose_card.SetGlobalPosition(field2_pos[fill_number2]);
-// 					card_field2.Add(choose_card);
-// 					playerTwoHand.Remove(choose_card);
-// 					sortHandCards();
-// 					cardhighlighted=false;
-// 					playCardTime=!playCardTime;
-// 					battelTime=true;
-
-// 					if(fill_number2 <2){
-// 						fill_number2 ++;
-// 					}
-// 					else{
-// 						field2full = !field2full;
-// 					}
-
-// 				}
-
-// 		}
-// 	}
 	
   	 
 //  // IF Zugfase
@@ -401,23 +361,6 @@ public class CardGame : Node2D
 
 	}
 
-	// public void sortHandCards(){
-	// 	if(playerOne)
-	// 	{
-	// 		for(int k=0; k<playerOneHand.Count; k++){
-	// 			var card = playerOneHand[k];
-	// 			card.SetGlobalPosition(hand1_pos[k]);
-	// 		}
-	// 	}
-	// 	else if(playerTwo)
-	// 	{
-	// 		for(int k=0; k<playerTwoHand.Count; k++){
-	// 			var card = playerTwoHand[k];
-	// 			card.SetGlobalPosition(hand2_pos[k]);
-	// 		}
-	// 	}
-	// }
-
 	public Monster_01_2D crateCard(String cardId, String imagePath, int atk, int def,String name, String disciption ){
 		Monster_01_2D card= GetNode<Monster_01_2D>(cardId);
 		card._SetImage(imagePath);
@@ -426,73 +369,7 @@ public class CardGame : Node2D
 		card._SetName(name);
 		card._SetDescription(disciption);
 		return card;
-
 	}
-
-	// public bool highlight(List<Monster_01_2D> card_List){
-	// 	pos = 0;
-	// 		choose_card = card_List[pos];
-	// 		choose_card.SetGlobalScale(_scalerBig);
-	// 		choose_card.SetZIndex(1);
-	// 	return true;
-	// }
-
-	// public void moveHighlight(int max_pos, List<Monster_01_2D> card_List, String input){
-	// 	if(input.Equals( "go_right") ){
-	// 	choose_card = playerOneHand[pos];
-	// 		if(pos < max_pos -1){
-
-	// 			choose_card.SetGlobalScale(_scaler);
-	// 			choose_card.SetZIndex(0);
-
-	// 			pos = pos +1;
-	// 			choose_card = card_List[pos];
-	// 			choose_card.SetGlobalScale(_scalerBig);
-	// 			choose_card.SetZIndex(1);
-
-	// 		}
-	// 		else{
-
-	// 			choose_card.SetGlobalScale(_scaler);
-	// 			choose_card.SetZIndex(0);
-
-	// 			pos=0;
-	// 			choose_card = playerOneHand[pos];
-	// 			choose_card.SetGlobalScale(_scalerBig);
-	// 			choose_card.SetZIndex(1);
-
-	// 		}
-
-	// 	}
-	// 	if(input.Equals("go_left")){
-	// 		choose_card = card_List[pos];
-	// 		if(pos > min_pos){
-
-	// 			choose_card.SetGlobalScale(_scaler);
-	// 			choose_card.SetZIndex(0);
-
-	// 			pos = pos -1;
-	// 			choose_card = playerOneHand[pos];
-	// 			choose_card.SetGlobalScale(_scalerBig);
-	// 			choose_card.SetZIndex(1);
-
-	// 		}else{
-
-	// 			choose_card.SetGlobalScale(_scaler);
-	// 			choose_card.SetZIndex(0);
-
-	// 			pos= max_pos -1;
-	// 			choose_card = card_List[pos];
-	// 			choose_card.SetGlobalScale(_scalerBig);
-	// 			choose_card.SetZIndex(1);
-
-	// 		}
-	// }
-
-	// }
-		
-
-  
 
 	// private void _on_EndTurnButton_pressed() {
 		
