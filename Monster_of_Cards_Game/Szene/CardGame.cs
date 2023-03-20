@@ -14,6 +14,10 @@ public class CardGame : Node2D
 
 	private Vector2 _scaler= new Vector2(0.2f,0.2f);
 	private Vector2 _scalerBig = new Vector2(0.4f,0.4f);
+
+	//Labels
+	private Label_LifePoints taste;
+	private Label_LifePoints phase;
 	private Random random;
 
 //Spieler
@@ -61,6 +65,12 @@ public class CardGame : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		//Labels for user Hlep
+		phase = GetNode<Label_LifePoints>("Phase");
+		phase.SetText("Zugphase");
+
+		taste = GetNode<Label_LifePoints>("Taste");
+		taste.SetText("Taste: D");
 		
 		//ToDo
 		PlayerTwo.setHand_pos(new Vector2(200,100));

@@ -65,36 +65,6 @@ position = Vector2( 794, 358 )
 position = Vector2( 794, 358 )
 
 [node name="Monster_16" parent="." instance=ExtResource( 3 )]
-position = Vector2( 796, 358 )
-
-[node name="Monster_17" parent="." instance=ExtResource( 3 )]
-position = Vector2( 794, 358 )
-
-[node name="Monster_18" parent="." instance=ExtResource( 3 )]
-position = Vector2( 794, 358 )
-
-[node name="Monster_19" parent="." instance=ExtResource( 3 )]
-position = Vector2( 794, 358 )
-
-[node name="Monster_20" parent="." instance=ExtResource( 3 )]
-position = Vector2( 794, 358 )
-
-[node name="Monster_21" parent="." instance=ExtResource( 3 )]
-position = Vector2( 794, 358 )
-
-[node name="Monster_22" parent="." instance=ExtResource( 3 )]
-position = Vector2( 794, 358 )
-
-[node name="Monster_23" parent="." instance=ExtResource( 3 )]
-position = Vector2( 794, 358 )
-
-[node name="Monster_24" parent="." instance=ExtResource( 3 )]
-position = Vector2( 794, 358 )
-
-[node name="Monster_25" parent="." instance=ExtResource( 3 )]
-position = Vector2( 794, 358 )
-
-[node name="Monster_26" parent="." instance=ExtResource( 3 )]
 position = Vector2( 794, 358 )
 
 [node name="Card_back" parent="." instance=ExtResource( 5 )]
@@ -157,6 +127,25 @@ margin_left = 99.0
 margin_top = 167.0
 margin_right = 198.0
 margin_bottom = 201.0
+script = ExtResource( 6 )
+
+[node name="Phase" type="Label" parent="."]
+modulate = Color( 0.0470588, 0.00392157, 0.00392157, 1 )
+margin_left = 881.0
+margin_top = 207.0
+margin_right = 990.0
+margin_bottom = 221.0
+text = "Dein Zug"
+script = ExtResource( 6 )
+
+[node name="Taste" type="Label" parent="."]
+modulate = Color( 0.0470588, 0.00392157, 0.00392157, 1 )
+show_behind_parent = true
+margin_left = 888.0
+margin_top = 237.0
+margin_right = 994.0
+margin_bottom = 251.0
+text = "Taste: D"
 script = ExtResource( 6 )
 
 [connection signal="pressed" from="EndTurnButton" to="." method="_on_EndTurnButton_pressed"]
