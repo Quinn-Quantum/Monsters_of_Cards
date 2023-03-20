@@ -32,6 +32,8 @@ public class CardGame : Node2D
 	private bool firstDrawPlayerOne = true;
 	private List<Monster_01_2D> myCardList1 = new List<Monster_01_2D>();
 	private deck_number number_cards_in_deck1;
+
+	private Label_LifePoints lifePoints_PlayerOne;
 	
 	//Feld Player one
 	int fill_number=0;
@@ -40,6 +42,8 @@ public class CardGame : Node2D
 	private List<Monster_01_2D> card_field1 = new List<Monster_01_2D>();
 
 	//for player two
+
+		private Label_LifePoints lifePoints_PlayerTwo;
 	private bool playerTwo = false; //if it is Player one turne
 	private bool firstDrawPlayerTwo = true;
 	private List<Monster_01_2D> myCardList2 = new List<Monster_01_2D>();
@@ -144,8 +148,14 @@ public class CardGame : Node2D
 		number_cards_in_deck1 = GetNode<deck_number>("Card_back/deck_number1");
 		number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
 
+		lifePoints_PlayerOne = GetNode<Label_LifePoints>("LP_01");
+		lifePoints_PlayerOne.SetText(PlayerOne.getlifePointAsString() + " LP");
+
 		number_cards_in_deck2 = GetNode<deck_number>("Card_back2/deck_number2");
 		number_cards_in_deck2.SetText(myCardList2.Count.ToString()+" Cards");
+
+		lifePoints_PlayerTwo = GetNode<Label_LifePoints>("LP_02");
+		lifePoints_PlayerTwo.SetText(PlayerTwo.getlifePointAsString() + " LP");
 		
 		_EndTurnButton = GetNode<Button>("EndTurnButton");
 		_StartTurnButton = GetNode<Button>("StartTurnButton");

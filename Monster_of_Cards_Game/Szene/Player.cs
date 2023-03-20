@@ -10,6 +10,8 @@ using System.Linq;
 
 public class Player 
 {
+
+  public int lifePoint = 10;
    public bool fieldfull=false;
    private List<Monster_01_2D> playerHand = new List<Monster_01_2D>(); 
 //ausgewählte Handkarte
@@ -159,5 +161,19 @@ public class Player
 	}
 
 	}
+
+  public int addLife(int a){
+    lifePoint = lifePoint + a;
+    return lifePoint;
+  }
+
+   public int minesLife(int a){
+    lifePoint = lifePoint - a;
+    return lifePoint;
+  }
+
+  public String getlifePointAsString(){
+    return lifePoint.ToString();
+  }
     
 }
