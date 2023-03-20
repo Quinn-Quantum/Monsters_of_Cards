@@ -161,19 +161,19 @@ public class CardGame : Node2D
 		_Monster12 = crateCard("Monster_12","res://Assets/Monsters/Monster_12.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
 		_Monster13 = crateCard("Monster_13","res://Assets/Monsters/Monster_13.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
 
-		_Monster14 = crateCard("Monster_01","res://Assets/Monsters/Monster_01.png",3,3, "Test","Hallo Welt");
-		_Monster15 = crateCard("Monster_02","res://Assets/Monsters/Monster_02.png",3,3, "Name","Hallo Welt");
-		_Monster16 = crateCard("Monster_03","res://Assets/Monsters/Monster_03.png",3,3, "Name","Hallo Welt, was Geht so ab?");
-		_Monster17 = crateCard("Monster_04","res://Assets/Monsters/Monster_04.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
-		_Monster18 = crateCard("Monster_05","res://Assets/Monsters/Monster_05.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
-		_Monster19 = crateCard("Monster_06","res://Assets/Monsters/Monster_06.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
-		_Monster20 = crateCard("Monster_07","res://Assets/Monsters/Monster_07.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
-		_Monster21 = crateCard("Monster_08","res://Assets/Monsters/Monster_08.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
-		_Monster22 = crateCard("Monster_09","res://Assets/Monsters/Monster_09.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
-		_Monster23 = crateCard("Monster_10","res://Assets/Monsters/Monster_10.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
-		_Monster24 = crateCard("Monster_11","res://Assets/Monsters/Monster_11.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
-		_Monster25 = crateCard("Monster_12","res://Assets/Monsters/Monster_12.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
-		_Monster26 = crateCard("Monster_13","res://Assets/Monsters/Monster_13.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster14 = crateCard("Monster_14","res://Assets/Monsters/Monster_01.png",3,3, "Test","Hallo Welt");
+		_Monster15 = crateCard("Monster_15","res://Assets/Monsters/Monster_02.png",3,3, "Name","Hallo Welt");
+		_Monster16 = crateCard("Monster_16","res://Assets/Monsters/Monster_03.png",3,3, "Name","Hallo Welt, was Geht so ab?");
+		_Monster17 = crateCard("Monster_17","res://Assets/Monsters/Monster_04.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster18 = crateCard("Monster_18","res://Assets/Monsters/Monster_05.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster19 = crateCard("Monster_19","res://Assets/Monsters/Monster_06.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster20 = crateCard("Monster_20","res://Assets/Monsters/Monster_07.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster21 = crateCard("Monster_21","res://Assets/Monsters/Monster_08.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster22 = crateCard("Monster_22","res://Assets/Monsters/Monster_09.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster23 = crateCard("Monster_23","res://Assets/Monsters/Monster_10.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster24 = crateCard("Monster_24","res://Assets/Monsters/Monster_11.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster25 = crateCard("Monster_25","res://Assets/Monsters/Monster_12.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
+		_Monster26 = crateCard("Monster_26","res://Assets/Monsters/Monster_13.png",3,3, "Name","Hallo Welt, Ich bin ein böses Monster der Unterwelt");
 
 		myCardList1.Add(_Monster01);
 		myCardList1.Add(_Monster02);
@@ -220,49 +220,47 @@ public class CardGame : Node2D
 		}
 		// Called every frame. 'delta' is the elapsed time since the previous frame.
 
-  public override void _Process(float delta)
-  {
-
+  public override void _Process(float delta) {
 	
 	 if(Input.IsActionJustPressed("draw")){	
 		cardhighlighted=false;		
 			//erster zug
 			if(firstDrawPlayerOne || firstDrawPlayerTwo){				
-					if(playerOne && firstDrawPlayerOne){
-						for(int i = 0; i <=4; i++){
-							int index = random.Next(myCardList1.Count);
-							var move = myCardList1[index];
-							playerOneHand.Add(move);
-							move.SetVisible(true);
-							myCardList1.RemoveAt(index);
-							number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
-						
-						}
-						firstDrawPlayerOne = false;
-						sortHandCards();
-						playCardTime=true;
+				if(playerOne && firstDrawPlayerOne){
+					for(int i = 0; i <=4; i++){
+						int index = random.Next(myCardList1.Count);
+						var move = myCardList1[index];
+						playerOneHand.Add(move);
+						move.SetVisible(true);
+						myCardList1.RemoveAt(index);
+						number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
+					
+					}
+					firstDrawPlayerOne = false;
+					sortHandCards();
+					playCardTime=true;
 
-					}
-					else if(playerTwo && firstDrawPlayerTwo){
-						//Umschreiben für Speiler zwei
-						for(int i = 0; i <=4; i++){
-							int index = random.Next(myCardList2.Count);
-							var move = myCardList2[index];
-							playerTwoHand.Add(move);
-							move.SetVisible(true);
-							myCardList2.RemoveAt(index);
-							number_cards_in_deck2.SetText(myCardList2.Count.ToString()+" Cards");
-						
-						}
-						firstDrawPlayerTwo = false;
-						sortHandCards();
-						playCardTime=true;
-
-					}
-					else{
-						GD.Print("Falsche Taste");
-					}
 				}
+				else if(playerTwo && firstDrawPlayerTwo){
+					//Umschreiben für Speiler zwei
+					for(int i = 0; i <=4; i++){
+						int index = random.Next(myCardList2.Count);
+						var move = myCardList2[index];
+						playerTwoHand.Add(move);
+						move.SetVisible(true);
+						myCardList2.RemoveAt(index);
+						number_cards_in_deck2.SetText(myCardList2.Count.ToString()+" Cards");
+					
+					}
+					firstDrawPlayerTwo = false;
+					sortHandCards();
+					playCardTime=true;
+
+				}
+				else{
+					GD.Print("Falsche Taste");
+				}
+			}
 
 			//alleweiteren Züge
 			else if(!playCardTime && !battelTime){
@@ -542,33 +540,49 @@ public class CardGame : Node2D
 
 	private void _on_EndTurnButton_pressed() {
 		
-		foreach (var item in playerOneHand)
-		{
-			item.SetVisible(false);
-		}
 		if(playerOne){
+			foreach (var item in playerOneHand)
+			{
+				item.SetVisible(false);
+			}
 			playerOne = false;
 			firstDrawPlayerOne = false;
 			playerTwo = true;
 			battelTime=false;
 		}
 		else if(playerTwo){
-			playerTwo = true;
-			firstDrawPlayerTwo = false;
+			foreach (var item in playerTwoHand)
+			{
+				item.SetVisible(false);
+			}
 			playerTwo = false;
+			firstDrawPlayerTwo = false;
+			playerOne = true;
 			battelTime=false;
 		}
+
 		_StartTurnButton.SetVisible(true);
 		_EndTurnButton.SetVisible(false);
 	}
 
 	private void _on_StartTurnButton_pressed() {
-		foreach (var item in playerTwoHand)
-		{
-			item.SetVisible(true);
+		
+		if(playerOne) {
+			foreach (var item in playerOneHand)
+			{
+				item.SetVisible(true);
+			}
 		}
+		else if(playerTwo) {
+			foreach (var item in playerTwoHand)
+			{
+				item.SetVisible(true);
+			}
+		}		
+		
 		_StartTurnButton.SetVisible(false);
 		_EndTurnButton.SetVisible(true);
+		drawCard=true;
 	}
 
 }

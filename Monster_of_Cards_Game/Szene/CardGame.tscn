@@ -63,6 +63,39 @@ position = Vector2( 794, 358 )
 [node name="Monster_15" parent="." instance=ExtResource( 3 )]
 position = Vector2( 794, 358 )
 
+[node name="Monster_16" parent="." instance=ExtResource( 3 )]
+position = Vector2( 796, 358 )
+
+[node name="Monster_17" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_18" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_19" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_20" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_21" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_22" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_23" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_24" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_25" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
+[node name="Monster_26" parent="." instance=ExtResource( 3 )]
+position = Vector2( 794, 358 )
+
 [node name="Card_back" parent="." instance=ExtResource( 5 )]
 position = Vector2( 900, 500 )
 scale = Vector2( 0.774, 0.696 )
