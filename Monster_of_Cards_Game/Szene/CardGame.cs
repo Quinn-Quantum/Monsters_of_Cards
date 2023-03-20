@@ -442,6 +442,8 @@ public class CardGame : Node2D
 				item.SetVisible(true);
 			}
 		}		
+		phase.SetText("Zugphase");
+		taste.SetText("Taste: D");
 		
 		_StartTurnButton.SetVisible(false);
 		_EndTurnButton.SetVisible(true);
