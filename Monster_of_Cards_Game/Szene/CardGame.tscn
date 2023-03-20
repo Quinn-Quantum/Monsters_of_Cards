@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Szene/CardGame.cs" type="Script" id=1]
 [ext_resource path="res://Assets/hintergrund_test.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Szene/deck_number.cs" type="Script" id=4]
 [ext_resource path="res://Assets/Area2D_Cards/Card_back.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Szene/Label_LifePoints.cs" type="Script" id=6]
+[ext_resource path="res://Assets/Area2D_Cards/Label_Discription.cs" type="Script" id=7]
 
 [node name="CardGame" type="Node2D"]
 position = Vector2( -1, 0 )
@@ -137,6 +138,7 @@ margin_bottom = 361.0
 text = "End Turn"
 
 [node name="StartTurnButton" type="Button" parent="."]
+visible = false
 margin_left = 909.0
 margin_top = 304.0
 margin_right = 982.0
@@ -158,6 +160,24 @@ margin_top = 167.0
 margin_right = 198.0
 margin_bottom = 201.0
 script = ExtResource( 6 )
+
+[node name="Phase" type="Label" parent="."]
+modulate = Color( 0.0705882, 0.00784314, 0.00784314, 1 )
+margin_left = 878.0
+margin_top = 202.0
+margin_right = 996.0
+margin_bottom = 236.0
+text = "Phase 1"
+script = ExtResource( 6 )
+
+[node name="Taste" type="RichTextLabel" parent="."]
+modulate = Color( 0.0392157, 0, 0, 1 )
+margin_left = 874.0
+margin_top = 242.0
+margin_right = 986.0
+margin_bottom = 282.0
+text = "Taste: A"
+script = ExtResource( 7 )
 
 [connection signal="pressed" from="EndTurnButton" to="." method="_on_EndTurnButton_pressed"]
 [connection signal="pressed" from="StartTurnButton" to="." method="_on_StartTurnButton_pressed"]

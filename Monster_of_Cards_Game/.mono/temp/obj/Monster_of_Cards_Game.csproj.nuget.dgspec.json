@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\t.schaedler\\OneDrive - OSZ IMT\\Desktop\\Monsters of Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj": {}
+    "C:\\Users\\Otto\\Documents\\C#\\Monsters_of_Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj": {}
   },
   "projects": {
-    "C:\\Users\\t.schaedler\\OneDrive - OSZ IMT\\Desktop\\Monsters of Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj": {
+    "C:\\Users\\Otto\\Documents\\C#\\Monsters_of_Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\t.schaedler\\OneDrive - OSZ IMT\\Desktop\\Monsters of Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj",
+        "projectUniqueName": "C:\\Users\\Otto\\Documents\\C#\\Monsters_of_Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj",
         "projectName": "Monster_of_Cards_Game",
-        "projectPath": "C:\\Users\\t.schaedler\\OneDrive - OSZ IMT\\Desktop\\Monsters of Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj",
-        "packagesPath": "C:\\Users\\t.schaedler\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\t.schaedler\\OneDrive - OSZ IMT\\Desktop\\Monsters of Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\.mono\\temp\\obj\\",
+        "projectPath": "C:\\Users\\Otto\\Documents\\C#\\Monsters_of_Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\Monster_of_Cards_Game.csproj",
+        "packagesPath": "C:\\Users\\Otto\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Otto\\Documents\\C#\\Monsters_of_Cards\\Monsters_of_Cards\\Monster_of_Cards_Game\\.mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\t.schaedler\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Otto\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,7 +43,7 @@
       "frameworks": {
         "net472": {
           "targetAlias": "net472",
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
