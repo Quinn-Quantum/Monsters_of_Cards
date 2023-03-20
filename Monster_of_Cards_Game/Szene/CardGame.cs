@@ -262,6 +262,7 @@ public class CardGame : Node2D
 			}
 		}
 	}
+	
 
 	if(playerTwo)
 	{		
