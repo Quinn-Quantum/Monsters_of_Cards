@@ -16,34 +16,12 @@ public class CardGame : Node2D
 
 	public PackedScene simultaneousScene ;
 
-	private Monster_01_2D  _Monster01;
-	private Monster_01_2D  _Monster02;
-	private Monster_01_2D  _Monster03;
-	private Monster_01_2D  _Monster04;
-	private Monster_01_2D  _Monster05;
-	private Monster_01_2D  _Monster06;
-	private Monster_01_2D  _Monster07;
-	private Monster_01_2D  _Monster08;
-	private Monster_01_2D  _Monster09;
-	private Monster_01_2D  _Monster10;
-	private Monster_01_2D  _Monster11;
-	private Monster_01_2D  _Monster12;
-	private Monster_01_2D  _Monster13;
+	private Monster_01_2D  _Monster01, _Monster02,  _Monster03, _Monster04,  _Monster05, _Monster06,  _Monster07;
+	private Monster_01_2D  _Monster08,  _Monster09, _Monster10,  _Monster11,  _Monster12,  _Monster13;
 
 	
-	private Monster_01_2D  _Monster14;
-	private Monster_01_2D  _Monster15;
-	private Monster_01_2D  _Monster16;
-	private Monster_01_2D  _Monster17;
-	private Monster_01_2D  _Monster18;
-	private Monster_01_2D  _Monster19;
-	private Monster_01_2D  _Monster20;
-	private Monster_01_2D  _Monster21;
-	private Monster_01_2D  _Monster22;
-	private Monster_01_2D  _Monster23;
-	private Monster_01_2D  _Monster24;
-	private Monster_01_2D  _Monster25;
-	private Monster_01_2D  _Monster26;
+	private Monster_01_2D  _Monster14,  _Monster15,  _Monster16,  _Monster17,  _Monster18,  _Monster19,  _Monster20;
+	private Monster_01_2D  _Monster21,  _Monster22, _Monster23,  _Monster24,  _Monster25, _Monster26;
 
 	private Vector2 _scaler= new Vector2(0.2f,0.2f);
 	private Vector2 _scalerBig = new Vector2(0.4f,0.4f);
@@ -286,8 +264,8 @@ public class CardGame : Node2D
 		if(!cardhighlighted && playCardTime){
 			
 		if(Input.IsActionJustPressed("Active")){
-			GD.Print("Tee");
-				cardhighlighted = PlayerOne.highlightaCard();
+			
+			cardhighlighted = PlayerOne.highlightaCard();
 				
 		}
 
@@ -328,8 +306,8 @@ public class CardGame : Node2D
 	if(playerOne && !field1full && playCardTime && cardhighlighted)
 	{
 				
-			GD.Print("Kaffee");
-			if(Input.IsActionJustPressed("Active")){
+			
+			if(Input.IsActionJustPressed("PlayACard")){
 					var choose_card = PlayerOne.getChoose_card();
 					choose_card.SetZIndex(0);
 					
