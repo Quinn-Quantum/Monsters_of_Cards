@@ -28,14 +28,14 @@ public class Player
 
     private Random random;
 
-     public void setPlyerHandCard(Monster_01_2D  value)
+     public void setPlayerHandCard(Monster_01_2D  value)
   {
         
         playerHand.Add(value); 
         value.SetVisible(true);
     
   }
-    public List<Monster_01_2D> getPlyerHand()
+    public List<Monster_01_2D> getPlayerHand()
   {
        return playerHand; 
        

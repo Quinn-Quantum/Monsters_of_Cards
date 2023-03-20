@@ -164,7 +164,7 @@ public class CardGame : Node2D
 						for(int i = 0; i <=4; i++){
 							int index = random.Next(myCardList1.Count);
 							var card_to_move = myCardList1[index];
-							PlayerOne.setPlyerHandCard(card_to_move);
+							PlayerOne.setPlayerHandCard(card_to_move);
 							myCardList1.RemoveAt(index);
 							number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
 						
@@ -179,7 +179,7 @@ public class CardGame : Node2D
 						for(int i = 0; i <=4; i++){
 							int index = random.Next(myCardList2.Count);
 							var card_to_move = myCardList2[index];
-							PlayerTwo.setPlyerHandCard(card_to_move);
+							PlayerTwo.setPlayerHandCard(card_to_move);
 							myCardList2.RemoveAt(index);
 							number_cards_in_deck2.SetText(myCardList2.Count.ToString()+" Cards");
 						
@@ -198,7 +198,7 @@ public class CardGame : Node2D
 				if(playerOne && drawCard){
 					int index_n = random.Next(myCardList1.Count);
 					var card_to_move = myCardList1[index_n];
-					PlayerOne.setPlyerHandCard(card_to_move);
+					PlayerOne.setPlayerHandCard(card_to_move);
 					myCardList1.RemoveAt(index_n);
 					number_cards_in_deck1.SetText(myCardList1.Count.ToString()+" Cards");
 
@@ -212,7 +212,7 @@ public class CardGame : Node2D
 					int index_n = random.Next(myCardList2.Count);
 					var card_to_move = myCardList2[index_n];					
 					myCardList2.RemoveAt(index_n);
-					PlayerTwo.setPlyerHandCard(card_to_move);
+					PlayerTwo.setPlayerHandCard(card_to_move);
 					number_cards_in_deck2.SetText(myCardList2.Count.ToString()+" Cards");
 
 					drawCard=!drawCard;
